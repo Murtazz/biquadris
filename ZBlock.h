@@ -1,28 +1,28 @@
-#ifndef __JBLOCK_H__
-#define __JBLOCK_H__
+#ifndef __ZBLOCK_H__
+#define __ZBLOCK_H__
 #include <iostream>
 #include <string>
 #include <memory>
 #include <vector>
 #include "Block.h"
 
-class JBlock : public Block {
-    std::string BlockType = "J";
+class ZBlock: public Block{
+    std::string BlockType = "Z";
     int currentRotation;
 protected:
     std::vector<std::vector <std::string>> v;
 public:
     void clockw() override;
     void cclockw() override;
-    JBlock();
-    ~JBlock();
+    ZBlock();
+    ~ZBlock();
     void print() override;
     std::vector<std::vector <std::string>> getBlock() override;
-    JBlock* clone () override;
-    std::unique_ptr<std::JBlock> Aclone() {
-        return std::unique_ptr<JBlock> (this->clone());
+    ZBlock* clone() override;
+    std::unique_ptr<ZBlock> Aclone() {
+        return std::unique_ptr<ZBlock> (this->clone());
     }
-    std::string GetType() override;
+    std::string GetType () override;
 };
 
 #endif

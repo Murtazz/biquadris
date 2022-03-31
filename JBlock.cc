@@ -3,9 +3,7 @@ using namespace std;
 
 JBlock::JBlock() {
     currentRotation = 0;
-    
     v.resize(5);
-    
     for (int i = 0; i < 4; ++i) {
         v.resize(4);
     }
@@ -61,13 +59,13 @@ void JBlock::clockw() {
         };
         currentRotation = 0;
     }
-};
+}
 
 void JBlock::cclockw() {
-    CW();
-    CW();
-    CW();
-};
+    clockw();
+    clockw();
+    clockw();
+}
 
 void JBlock::print() {
     for (int i = 0; i < 5; ++i) {
