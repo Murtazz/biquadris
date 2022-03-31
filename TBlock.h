@@ -1,5 +1,5 @@
-#ifndef TBlock_h
-#define TBlock_h
+#ifndef __TBLOCK_H__
+#define __TBLOCK_H__
 
 #include "TBlock.h"
 #include "Block.h"

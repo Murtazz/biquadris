@@ -1,5 +1,5 @@
-#ifndef IBlock_h
-#define IBlock_h
+#ifndef __IBLOCK_H__
+#define __IBLOCK_H__
 #include <string>
 #include "Block.h"
 #include <memory>

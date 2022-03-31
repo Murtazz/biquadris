@@ -1,5 +1,5 @@
-#ifndef OBlock_h
-#define OBlock_h
+#ifndef __OBLOCK_H__
+#define __OBLOCK_H__
 #include "Block.h"
 #include <string>
 #include <iostream>
