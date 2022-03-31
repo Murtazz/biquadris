@@ -1,10 +1,9 @@
 #include "IBlock.h"
-#include <iostream>
 
 using namespace std;
 
 IBlock:: IBlock(){
-    rs = 0;
+    currentRotation = 0;
     v.resize(5);
     for (int i = 0; i < 4; ++i){
         v.resize(4);
@@ -22,7 +21,7 @@ IBlock:: IBlock(){
 IBlock::~IBlock(){}
 
 void IBlock::clockw(){
-    if (rs == 1){
+    if (currentRotation == 1){
         v = {
             {" ", " ", " ", " "},
             {" ", " ", " ", " "},
@@ -30,7 +29,7 @@ void IBlock::clockw(){
             {"I", "I", "I", "I"},
             {" ", " ", " ", " "},
         };
-        rs = 0;
+        currentRotation = 0;
     }
     else {
         v = {
@@ -45,7 +44,7 @@ void IBlock::clockw(){
 };
 
 void  IBlock::cclockw(){
-   if ( rs == 1){
+   if ( currentRotation == 1){
         v = {
             {"I", " ", " ", " "},
             {"I", " ", " ", " "},
@@ -53,7 +52,7 @@ void  IBlock::cclockw(){
             {"I", " ", " ", " "},
             {" ", " ", " ", " "},
         };
-        rs = 0;
+        currentRotation = 0;
     }
     else {
         v = {
@@ -63,7 +62,7 @@ void  IBlock::cclockw(){
             {"I", "I", "I", "I"},
             {" ", " ", " ", " "},
         };
-        rs = 1;
+        currentRotation = 1;
     } 
 }
 

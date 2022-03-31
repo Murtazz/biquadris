@@ -1,27 +1,27 @@
 #ifndef IBlock_h
 #define IBlock_h
 #include <string>
-#include "Block.hpp"
+#include "Block.h"
 #include <memory>
-using namespace std;
+#include <iostream>
 #include <vector>
 class IBlock : public Block{
-    string BlockType = "I";
-    int rs;
+    std::string BlockType = "I";
+    int currentRotation;
 protected:
-    vector<vector <string>> v;
+    std::vector<std::vector <std::string>> v;
 public:
     void clockw() override;
     void cclockw() override;
     IBlock();
     ~IBlock();
     void print () override;
-    vector<vector <string>> getBlock() override;
+    std::vector<std::vector <std::string>> getBlock() override;
     IBlock* clone () override;
     std::unique_ptr<IBlock> Aclone() {
         return std::unique_ptr<IBlock> (this->clone());
     }
-    string GetType () override;
+    std::string GetType () override;
 };
 
 #endif
