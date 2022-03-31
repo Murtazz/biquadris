@@ -11,7 +11,7 @@ protected:
 
 public:
     void clockw() override;
-    void cclockW() override;
+    void cclockw() override;
     LBlock();
     ~LBlock();
     void print () override;
