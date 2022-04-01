@@ -456,7 +456,7 @@ int main(int argc, const char * argv[]) {
             if(cmd.length() > 2){
                 if(cmd[2] == 'f'){
                     if(num < 0) num = 1;
-                    while(num != 0){
+                    while(num != 0) {
                         b.left(b.NowPlayer());
                         b.update(b.NowPlayer());
                         
