@@ -1,5 +1,4 @@
 #include "Window.h"
-
 using namespace std;
 
 const double pi = std::acos(-1);
