@@ -62,7 +62,7 @@ public:
     
     // ********************** clean line **********************
     int Recalculate(std::shared_ptr <Player>& player, bool sound) override;
-    void ClearLine(std::shared_ptr <Player>& player, vector< int > & clean_row, bool sound);
+    void ClearLine(std::shared_ptr <Player>& player, std::vector< int > & clean_row, bool sound);
     
     // ********************** Level UP and Down **********************
     void LevelUp(std::shared_ptr <Player>& player);

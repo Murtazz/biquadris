@@ -19,7 +19,7 @@ public:
     void print() override;
     std::vector<std::vector <std::string>> getBlock() override;
     JBlock* clone () override;
-    std::unique_ptr<std::JBlock> Aclone() {
+    std::unique_ptr<JBlock> Aclone() {
         return std::unique_ptr<JBlock> (this->clone());
     }
     std::string GetType() override;
