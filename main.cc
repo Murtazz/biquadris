@@ -47,7 +47,7 @@ int main(int argc, const char * argv[]) {
     
     int startlevel = 0;//start level
     bool shortkey = false;
-    BasicBoard b;
+    BiqBoard b;
     
     if( argc > 1 ){
         for(int i = 1 ; i < argc ; i++){
@@ -579,12 +579,12 @@ int main(int argc, const char * argv[]) {
         if (cmd == "T"){
             b.NowPlayer()->CurBlock = make_shared<TBlock>();
         }
-        if (cmd == "X"){
-            b.NowPlayer()->CurBlock = make_shared<XBlock>();
-        }
-        if (cmd == "C"){
-            b.NowPlayer()->CurBlock = make_shared<CBlock>();
-        }
+        //if (cmd == "X"){
+        //    b.NowPlayer()->CurBlock = make_shared<XBlock>();
+        //}
+        //if (cmd == "C"){
+        //    b.NowPlayer()->CurBlock = make_shared<CBlock>();
+        //}
         
         
         
@@ -618,8 +618,8 @@ int main(int argc, const char * argv[]) {
                             case 'S' : bk = make_shared<SBlock>();break;
                             case 'Z' : bk = make_shared<ZBlock>();break;
                             case 'T' : bk = make_shared<TBlock>();break;
-			    case 'C' : bk = make_shared<CBlock>();break;
-                            case 'X' : bk = make_shared<XBlock>();break;
+			                //case 'C' : bk = make_shared<CBlock>();break;
+                           // case 'X' : bk = make_shared<XBlock>();break;
                         }
                         //   Block* del = b.NowPlayer()->CurBlock;
                         b.NowPlayer()->CurBlock = bk;
@@ -639,7 +639,7 @@ int main(int argc, const char * argv[]) {
             
             b.ChangeTurn();//
         }//end  of punishment
-        
+        /*
         //we set the punish
         if (b.NowPlayer()->staron){//here is the * punishment
             if(b.NowPlayer()->notclear == 5){
@@ -662,7 +662,7 @@ int main(int argc, const char * argv[]) {
                 b.NowPlayer()->notclear = 0;//we reset
             }
         }//end of *
-        
+        */
         b.Recalculate(b.NowPlayer(), sound);
         
         b.DrawBlock(b.NowPlayer(), b.NowPlayer()->row, b.NowPlayer()->col);
