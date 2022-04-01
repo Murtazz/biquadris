@@ -1,8 +1,9 @@
-#ifndef __LEVEL_H
-#define __LEVEL_H
+#ifndef __LEVEL_H__
+#define __LEVEL_H__
 
-#include <stdio.h>
+#include <iostream>
 #include <vector>
+#include <memory>
 #include "Block.h"
 #include "LBlock.h"
 #include "OBlock.h"
@@ -13,7 +14,7 @@
 #include "TBlock.h"
 //#include "XBlock.h"
 //#include "CBlock.h"
-#include <memory>
+
 
 struct Player;
 
@@ -32,7 +33,7 @@ public:
 };
 
 
-
+/*
 //*************************subclasses****************************
 
 
@@ -158,5 +159,6 @@ public:
     void randomBack(int) override;
     
 };
+*/
 
-#endif /* Level_hpp */
+#endif
