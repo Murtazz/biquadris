@@ -43,9 +43,9 @@ void ZBlock::clockw() {
 }
 
 void ZBlock::cclockw() {
-    CW();
-    CW();
-    CW();
+    clockw();
+    clockw();
+    clockw();
 }
 
 void ZBlock::print() {

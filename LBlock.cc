@@ -64,7 +64,7 @@ void LBlock::clockw(){
 };
 
 void LBlock:: cclockw() {
-    clockw());
+    clockw();
     clockw();
     clockw();
 };

@@ -39,7 +39,7 @@ void IBlock::clockw(){
             {"I", " ", " ", " "},
             {" ", " ", " ", " "},
         };
-        rs = 1;
+        currentRotation = 1;
     }
 };
 

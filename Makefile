@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -Werror=vla -MMD -L/usr/X11/lib 
 EXEC = biquadris
-OBJECTS = main.o Board.o BiqBoard.o cell.o Block.o LBlock.o IBlock.o OBlock.o XBlock.o CBlock.o SBlock.o TBlock.o JBlock.o ZBlock.o Level.o StarBlock.o window.o draw.o
+OBJECTS = main.o Board.o BiqBoard.o Cell.o Block.o LBlock.o IBlock.o OBlock.o SBlock.o TBlock.o JBlock.o ZBlock.o Level.o Window.o Draw.o
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

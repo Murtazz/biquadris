@@ -1,5 +1,5 @@
 #include "Level.h"
-#include "player.h"
+#include "Player.h"
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
