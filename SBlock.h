@@ -10,7 +10,7 @@ class SBlock: public Block {
     std::string BlockType = "S";
     int currentRotation;
 protected:
-    std::vector<std::vector <string>> v;
+    std::vector<std::vector <std::string>> v;
 public:
     void clockw() override;
     void cclockw() override;
@@ -22,7 +22,7 @@ public:
     std::unique_ptr<SBlock> Aclone() {
         return std::unique_ptr<SBlock> (this->clone());
     }
-    string GetType() override;
+    std::string GetType() override;
 };
 
 #endif 
