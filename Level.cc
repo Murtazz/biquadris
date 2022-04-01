@@ -16,11 +16,11 @@ extern bool seedFree;
 
 
 
-Level::~Level(){}
+Level::~Level() {}
 
 
 //Return the int number for which level the player is
-int Level:: GetLevel() const{
+int Level:: GetLevel() const {
     return level_num;
 }
 
