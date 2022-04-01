@@ -1,5 +1,5 @@
-#ifndef LBlock_h
-#define LBlock_h
+#ifndef __LBLOCK_H__
+#define __LBLOCK_H__
 #include "Block.h"
 #include <string>
 #include <vector>
@@ -23,6 +23,4 @@ public:
     std::string GetType () override;
 };
 
-
-
-#endif /* LBlock_hpp */
+#endif

@@ -20,7 +20,7 @@ LBlock::LBlock(){
 
 LBlock::~LBlock(){
 }
-void LBlock::CW(){
+void LBlock::clockw(){
     if (currentRotation == 0){
         v = {
                 {" ", " ", " ", " "},
@@ -63,10 +63,10 @@ void LBlock::CW(){
     }
 };
 
-void LBlock:: CCW() {
-    CW();
-    CW();
-    CW();
+void LBlock:: cclockw() {
+    clockw());
+    clockw();
+    clockw();
 };
 
 void LBlock::print() {

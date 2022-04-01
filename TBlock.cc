@@ -17,8 +17,8 @@ TBlock::TBlock(){
     };
 }
 
-TBlock::~TBlock(){
-}
+TBlock::~TBlock(){}
+
 void TBlock::clockw(){
     if (currentRotation == 0){
         v = {
