@@ -1,8 +1,8 @@
 #ifndef __BIQBOARD_H__
 #define __BIQBOARD_H__
 #include "Board.h"
-#include "player.h"
-#include "cell.h"
+#include "Player.h"
+#include "Cell.h"
 #include "Window.h"
 
 #include <iostream>
@@ -11,14 +11,14 @@
 #include <memory>
 struct Player;
 
-class BasicBoard : public Board {
+class BiqBoard : public Board {
     std::shared_ptr <Player> player1;
     std::shared_ptr <Player> player2;
 public:
     bool IsText = false;
     // finish part
-    BasicBoard ();
-    ~BasicBoard ();
+    BiqBoard ();
+    ~BiqBoard ();
     
     // ********************** initialization **********************
     void SetPlayer(std::shared_ptr <Player>& player, std::string playername,int id,int level);
