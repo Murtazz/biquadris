@@ -322,7 +322,7 @@ int main(int argc, const char * argv[]) {
                 if(num < 0) num = 1;
                 for(;num > 0;num--){
                     if (b.NowPlayer()->cwPossible){
-                        b.NowPlayer()->CurBlock->CW();
+                        b.NowPlayer()->CurBlock->clockw();
                     }
                     b.SetPossibles();
                     b.update(b.NowPlayer());
@@ -333,7 +333,7 @@ int main(int argc, const char * argv[]) {
                 if(num < 0) num = 1;
                 for(;num > 0;num--){
                     if (b.NowPlayer()->ccwPossible){
-                        b.NowPlayer()->CurBlock->CCW();
+                        b.NowPlayer()->CurBlock->cclockw();
                     }
                     b.SetPossibles();
                     b.update(b.NowPlayer());
@@ -359,7 +359,7 @@ int main(int argc, const char * argv[]) {
                     if(num < 0) num = 1;
                     for(;num > 0;num--){
                         if (b.NowPlayer()->ccwPossible){
-                            b.NowPlayer()->CurBlock->CCW();
+                            b.NowPlayer()->CurBlock->cclockw();
                         }
                         b.SetPossibles();
                         b.update(b.NowPlayer());
@@ -370,7 +370,7 @@ int main(int argc, const char * argv[]) {
                     if(num < 0) num = 1;
                     for(;num > 0;num--){
                         if (b.NowPlayer()->cwPossible){
-                            b.NowPlayer()->CurBlock->CW();
+                            b.NowPlayer()->CurBlock->clockw();
                         }
                         b.SetPossibles();
                         b.update(b.NowPlayer());
@@ -383,7 +383,7 @@ int main(int argc, const char * argv[]) {
                     if(num < 0) num = 1;
                     for(;num > 0;num--){
                         if (b.NowPlayer()->ccwPossible){
-                            b.NowPlayer()->CurBlock->CCW();
+                            b.NowPlayer()->CurBlock->cclockw();
                         }
                         b.SetPossibles();
                         b.update(b.NowPlayer());
@@ -394,7 +394,7 @@ int main(int argc, const char * argv[]) {
                     if(num < 0) num = 1;
                     for(;num > 0;num--){
                         if (b.NowPlayer()->cwPossible){
-                            b.NowPlayer()->CurBlock->CW();
+                            b.NowPlayer()->CurBlock->clockw();
                         }
                         b.SetPossibles();
                         b.update(b.NowPlayer());
