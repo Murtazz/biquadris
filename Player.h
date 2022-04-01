@@ -7,7 +7,7 @@
 #include <memory>
 #include "Board.h"
 #include "Block.h"
-#include "cell.h"
+#include "Cell.h"
 #include "Level.h"
 
 struct Player{

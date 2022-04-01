@@ -7,7 +7,7 @@ class LBlock : public Block{
     std::string BlockType = "L";
     int currentRotation;
 protected:
-    std::vector<vector <string>> v;
+    std::vector<std::vector <std::string>> v;
 
 public:
     void clockw() override;

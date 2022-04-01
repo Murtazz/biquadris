@@ -2,7 +2,7 @@
 #define __CELL_H__
 #include <iostream>
 #include <string>
-#include "window.h"
+#include "Window.h"
 
 
 class Cell {

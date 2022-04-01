@@ -1,7 +1,7 @@
 #ifndef __BOURD_H__
 #define __BOURD_H__
 
-#include "player.hpp"
+#include "Player.h"
 #include "Window.h"
 #include <memory>
 
