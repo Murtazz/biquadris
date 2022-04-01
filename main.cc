@@ -32,7 +32,7 @@ string seqName1 = "sequence1.txt";
 string seqName2 = "sequence2.txt";
 string norstring;
 string seqstring;
-int seedNum = 888;//for seed, our initial number
+int seedNum = 888;
 bool seedFree = false;
 bool sound = false;
 bool specialOn = false;

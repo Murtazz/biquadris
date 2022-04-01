@@ -6,6 +6,12 @@
 #include <ctime>
 #include <random>
 
+using namespace std;
+
+extern string seqName1;
+extern string seqName2;
+extern int seedNum;
+extern bool seedFree;
 
 Level2::Level2(){
     level_num = 2;

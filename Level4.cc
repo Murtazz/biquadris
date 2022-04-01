@@ -6,6 +6,14 @@
 #include <ctime>
 #include <random>
 
+
+using namespace std;
+
+extern string seqName1;
+extern string seqName2;
+extern int seedNum;
+extern bool seedFree;
+
 Level4::Level4(){
     level_num = 4;
     random1 = true;//yes default is random

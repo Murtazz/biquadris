@@ -5,6 +5,10 @@
 
 
 struct Player;
+extern std::string seqName1;
+extern std::string seqName2;
+extern int seedNum;
+extern bool seedFree;
 
 class Level4 : public Level{
     std::vector<std::string> seqList1;

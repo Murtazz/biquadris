@@ -2,6 +2,8 @@
 #define __LEVEL_H__
 
 #include <iostream>
+#include <fstream>
+#include <string>
 #include <vector>
 #include <memory>
 #include "Block.h"
@@ -17,6 +19,10 @@
 
 
 struct Player;
+extern std::string seqName1;
+extern std::string seqName2;
+extern int seedNum;
+extern bool seedFree;
 
 
 //The abstract level class

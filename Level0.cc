@@ -6,6 +6,14 @@
 #include <ctime>
 #include <random>
 
+using namespace std;
+
+extern string seqName1;
+extern string seqName2;
+extern int seedNum;
+extern bool seedFree;
+
+
 Level0::Level0(){
     
     ifstream seq1{seqName1};
