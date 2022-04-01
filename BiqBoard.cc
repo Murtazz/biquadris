@@ -774,14 +774,14 @@ void BiqBoard::LevelUp(std::shared_ptr <Player>& player){
     
     if(le == 1) {
         //unique_ptr <Level> temp = player->levptr;
-        player->levptr= unique_ptr <Level> (new Level0);
+        player->levptr= unique_ptr <Level> (new Level1);
         player->level = 1;
         player->staron = false;
         //delete temp;
         
     }else if (le == 2){
         //unique_ptr <Level> temp = player->levptr;
-        player->levptr= unique_ptr <Level> (new Level0);
+        player->levptr= unique_ptr <Level> (new Level2);
         player->level = 2;
         player->staron = false;
         //delete temp;
@@ -789,7 +789,7 @@ void BiqBoard::LevelUp(std::shared_ptr <Player>& player){
     }else if (le == 3){
         
         //unique_ptr <Level> temp = player->levptr;
-        player->levptr= unique_ptr <Level> (new Level0);
+        player->levptr= unique_ptr <Level> (new Level3);
         player->level = 3;
         player->staron = false;
         //delete temp;
@@ -797,13 +797,13 @@ void BiqBoard::LevelUp(std::shared_ptr <Player>& player){
     }else if (le == 4){
         
         //unique_ptr <Level> temp = player->levptr;
-        player->levptr= unique_ptr <Level> (new Level0);
+        player->levptr= unique_ptr <Level> (new Level4);
         player->level = 4;
         player->staron = true;
         //delete temp;
         
     }else if ((le == 5)&&(specialOn)){
-        player->levptr= unique_ptr <Level> (new Level0);
+        player->levptr= unique_ptr <Level> (new Level5);
         player->level = 5;
         player->staron = false;
     }
@@ -817,14 +817,14 @@ void BiqBoard::LevelDown(std::shared_ptr <Player>& player){
     
     if(le == 1) {
         //unique_ptr <Level> temp = player->levptr;
-        player->levptr= unique_ptr <Level> (new Level0);
+        player->levptr= unique_ptr <Level> (new Level1);
         player->level = 1;
         player->staron = false;
         //delete temp;
         
     }else if (le == 2){
         //unique_ptr <Level> temp = player->levptr;
-        player->levptr= unique_ptr <Level> (new Level0);
+        player->levptr= unique_ptr <Level> (new Level2);
         player->level = 2;
         player->staron = false;
         //delete temp;
@@ -832,7 +832,7 @@ void BiqBoard::LevelDown(std::shared_ptr <Player>& player){
     }else if (le == 3){
         
         //unique_ptr <Level> temp = player->levptr;
-        player->levptr= unique_ptr <Level> (new Level0);
+        player->levptr= unique_ptr <Level> (new Level3);
         player->level = 3;
         player->staron = false;
         //delete temp;
@@ -846,7 +846,7 @@ void BiqBoard::LevelDown(std::shared_ptr <Player>& player){
         //delete temp;
     }else if (le == 4){
         
-        player->levptr= unique_ptr <Level> (new Level0);
+        player->levptr= unique_ptr <Level> (new Level4);
         player->level = 4;
         player->staron = true;
     }
