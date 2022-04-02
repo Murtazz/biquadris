@@ -52,10 +52,6 @@ int main(int argc, const char * argv[]) {
     if( argc > 1 ){
         for(int i = 1 ; i < argc ; i++){
             if(argv[i][0] == '-'){
-                //-easy
-                if(argv[i][1] == 'e'){
-                    shortkey = true;
-                }//we turn on a flag for short key
                 
                 //-text
                 //runs the program in text-only mode
@@ -66,6 +62,7 @@ int main(int argc, const char * argv[]) {
                 
                 //-s
                 if(argv[i][1] == 's'){
+                    /*
                     // -so.....
                     if (argv[i][2] == 'o') {
                        sound = true;
@@ -74,7 +71,7 @@ int main(int argc, const char * argv[]) {
                     if (argv[i][2] == 'p') {
                        specialOn = true;
                     }
-
+                    */
                     //-sc
                     if(argv[i][2] == 'c'){
                         //scriptfile1
@@ -160,8 +157,8 @@ int main(int argc, const char * argv[]) {
     //   Board * b = new BasicBoard();
     std::shared_ptr <Player>& player1 =b.GetPlayer1();
     std::shared_ptr <Player>& player2 =b.GetPlayer2();
-    b.SetPlayer(player1, "John",1,startlevel);//we add id for level checkting
-    b.SetPlayer(player2, "Yijian",2,startlevel);
+    b.SetPlayer(player1, "Murtaza",1,startlevel);//we add id for level checkting
+    b.SetPlayer(player2, "Qianli",2,startlevel);
     
     player1->CurBlock = player1->levptr->GetBlock(player1);
     player1->NextBlock = player1->levptr->GetBlock(player1);
@@ -183,14 +180,14 @@ int main(int argc, const char * argv[]) {
     
     //command interpreter*********************
     if (b.IsText){
-        board.drawString(200, 250, "Enjoy your TEXT Biquadris!!", 1);
+        board.drawString(200, 250, "Terminal Biquadris.", 3);
     }
     std::string cmdp;
-    while (cin >> cmdp){
+    while (cin >> cmdp) {
         std::vector<std::string> seqList;
         seqList.emplace_back("mapping");//the initial size will be 1
 
-       if(cmdp == "sequence"){
+       if(cmdp == "sequence") {
            string comfile;
            cin >> comfile;
            ifstream comseq{comfile};
@@ -200,12 +197,12 @@ int main(int argc, const char * argv[]) {
                seqList.emplace_back(tb);
            }
 
-       }else{
+       } else {
            seqList.emplace_back(cmdp);
        }
         
         // _the_ real_ command
-    while(seqList.size() != 1){
+    while(seqList.size() != 1) {
         string cmd = seqList[seqList.size() - 1];
         
         //deal the case with numbers!
@@ -242,14 +239,14 @@ int main(int argc, const char * argv[]) {
             
             cin >> contin;
             if (contin == "yes") {
-               b.Restart(b.NowPlayer(), b.OtherPlayer());
-               b.NowPlayer()->CurBlock = b.NowPlayer()->levptr->GetBlock(player1);
-               b.NowPlayer()->NextBlock = b.NowPlayer()->levptr->GetBlock(player1);
-               b.OtherPlayer()->CurBlock = b.OtherPlayer()->levptr->GetBlock(player2);
-               b.OtherPlayer()->NextBlock = b.OtherPlayer()->levptr->GetBlock(player2);
-	       cmd = " ";
+                b.Restart(b.NowPlayer(), b.OtherPlayer());
+                b.NowPlayer()->CurBlock = b.NowPlayer()->levptr->GetBlock(player1);
+                b.NowPlayer()->NextBlock = b.NowPlayer()->levptr->GetBlock(player1);
+                b.OtherPlayer()->CurBlock = b.OtherPlayer()->levptr->GetBlock(player2);
+                b.OtherPlayer()->NextBlock = b.OtherPlayer()->levptr->GetBlock(player2);
+                cmd = " ";
             } else {
-               break;
+                break;
             }
         }
         if (!b.GameOver (player2)){
@@ -269,7 +266,7 @@ int main(int argc, const char * argv[]) {
             }
         }
         
-        
+        /*
         //down - s
         //right - a
         //left - d
@@ -346,7 +343,7 @@ int main(int argc, const char * argv[]) {
                 b.BlockHeavy(b.NowPlayer());
             }
         }
-        
+        */
         
         //a
         //b

@@ -1,37 +1,37 @@
 #include "Cell.h"
-//#include "window.h"
+
 
 using namespace std;
 
 Cell::Cell(): isAlive(false), blind(false), color(" "), window(nullptr), x(0), y(0) {}
 
-Cell::~Cell() { }
+Cell::~Cell() {}
 
-void Cell::TurnOn(string new_color){
+void Cell::TurnOn(string new_color) {
     isAlive = true;
     color = new_color;
 }
 
-void Cell::TurnOff(string new_color){
+void Cell::TurnOff(string new_color) {
     isAlive = false;
     color = new_color;
 }
 
-void Cell::TurnBlind(){
+void Cell::TurnBlind() {
     blind = true;
 }
 
-void Cell::NotBlind(){
+void Cell::NotBlind() {
     blind = false;
 }
 
 
-bool Cell::IsAlive(){
+bool Cell::IsAlive() {
     return isAlive;
 }
 
 ostream &operator<<(ostream &out, const Cell &c) {
-    if (!(c.blind)){
+    if (!(c.blind)) {
     out << c.color;
     }
     else {
@@ -41,7 +41,7 @@ ostream &operator<<(ostream &out, const Cell &c) {
 }
 
 
-string Cell::GetColor (){
+string Cell::GetColor() {
     return color;
 }
 
