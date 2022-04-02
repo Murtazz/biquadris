@@ -7,7 +7,7 @@ void drawPx(int a, int b, Xwindow& board){
     int x = 10;
     int y = 180;
     int w = 16;
-    int c = 10;
+    int c = 9;
     
     board.fillRectangle(x + w*a, y + w*b  ,w , w , c);
     
@@ -19,7 +19,7 @@ void drawMainBoard(Xwindow &board, bool sound) {
 
     std::string s1;
     
-    int bg = 7;
+    int bg = 6;
     while(1){
         //we end(actually start game here)
         
