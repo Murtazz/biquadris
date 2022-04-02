@@ -150,16 +150,16 @@ void drawMainBoard(Xwindow &board, bool sound) {
         string line5 = "clockwise(cw) and counterclockwise(ccw).";
         string line6 = "Have fun! ";
 
-        board.drawString( 100 , 250 , line1,4);
-        board.drawString( 100 , 280 , line2,4);
-        board.drawString( 100 , 310 , line3,4);
-        board.drawString( 100 , 340 , line4,4);
-        board.drawString( 100 , 370 , line5,4);
-        board.drawString( 100 , 400 , line6,4);
+        board.drawString(100, 250, line1, 9);
+        board.drawString(100, 280, line2, 9);
+        board.drawString(100, 310, line3, 9);
+        board.drawString(100, 340, line4, 9);
+        board.drawString(100, 370, line5, 9);
+        board.drawString(100, 400, line6, 9);
         
         //hint
         string c = "Press anykey to continue! ";
-        board.drawString(180 , 530  , c);
+        board.drawString(225, 530, c, 7);
         
         
         

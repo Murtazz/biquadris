@@ -274,17 +274,17 @@ void BiqBoard::DrawNextBlock(std::shared_ptr <Player>& player1, std::shared_ptr 
                 if (b1[i][j] != " "){
 
                    if (b1[i][j] == "I") {
-                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 2);
+                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 10);
                    } else if (b1[i][j] == "J"){
-                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 3);
-                   } else if (b1[i][j] == "L"){
-                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 4);
-                   } else if (b1[i][j] == "Z"){
-                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 5);
-                   } else if (b1[i][j] == "S"){
                       board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 9);
+                   } else if (b1[i][j] == "L"){
+                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 5);
+                   } else if (b1[i][j] == "Z"){
+                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 6);
+                   } else if (b1[i][j] == "S"){
+                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 3);
                    } else if (b1[i][j] == "O"){
-                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 15);
+                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 13);
                    } else if (b1[i][j] == "T"){
                       board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 8);
                    } else if (b1[i][j] == "C"){
@@ -302,23 +302,23 @@ void BiqBoard::DrawNextBlock(std::shared_ptr <Player>& player1, std::shared_ptr 
             if (!IsText){
                 if (b2[i][j] != " "){
                    if (b2[i][j] == "I") {
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 2);
-                   } else if (b2[i][j] == "J"){
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 3);
-                   } else if (b2[i][j] == "L"){
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 4);
-                   } else if (b2[i][j] == "Z"){
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 5);
-                   } else if (b2[i][j] == "S"){
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 9);
-                   } else if (b2[i][j] == "O"){
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 15);
-                   } else if (b2[i][j] == "T"){
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 8);
-                   } else if (b2[i][j] == "C"){
                       board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 10);
+                   } else if (b2[i][j] == "J"){
+                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 9);
+                   } else if (b2[i][j] == "L"){
+                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 5);
+                   } else if (b2[i][j] == "Z"){
+                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 6);
+                   } else if (b2[i][j] == "S"){
+                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 3);
+                   } else if (b2[i][j] == "O"){
+                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 13);
+                   } else if (b2[i][j] == "T"){
+                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 12);
+                   } else if (b2[i][j] == "C"){
+                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 2);
                    } else if (b2[i][j] == "X"){
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 11);
+                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 1);
                    }
 
                 }

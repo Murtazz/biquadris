@@ -51,27 +51,27 @@ string Cell::GetColor (){
 
 void Cell::draw(int row, int col, Xwindow *board){
    if (color == "I") {
-     board->fillRectangle(row * 25, col *25, 25, 25, 2);
+     board->fillRectangle(row * 25, col *25, 25, 25, 10);
    } else if (color == "J"){
-     board->fillRectangle(row * 25, col *25, 25, 25, 3);
-   } else if (color == "L"){
-     board->fillRectangle(row * 25, col *25, 25, 25, 4);
-   } else if (color == "Z"){
-     board->fillRectangle(row * 25, col *25, 25, 25, 5);
-   } else if (color == "S"){
      board->fillRectangle(row * 25, col *25, 25, 25, 9);
+   } else if (color == "L"){
+     board->fillRectangle(row * 25, col *25, 25, 25, 5);
+   } else if (color == "Z"){
+     board->fillRectangle(row * 25, col *25, 25, 25, 6);
+   } else if (color == "S"){
+     board->fillRectangle(row * 25, col *25, 25, 25, 3);
    } else if (color == "O"){
-     board->fillRectangle(row * 25, col *25, 25, 25, 15);
+     board->fillRectangle(row * 25, col *25, 25, 25, 13);
    } else if (color == "T"){
-     board->fillRectangle(row * 25, col *25, 25, 25, 8);
+     board->fillRectangle(row * 25, col *25, 25, 25, 12);
    } else if (color == "*"){
-     board->fillRectangle(row * 25, col *25, 25, 25, 14);
+     board->fillRectangle(row * 25, col *25, 25, 25, 2);
    } else if (color == " ") {
-     board->fillRectangle(row * 25, col *25, 25, 25, 7);
+     board->fillRectangle(row * 25, col *25, 25, 25, 1);
    } else if (color == "C") {
      board->fillRectangle(row * 25, col *25, 25, 25, 10);
    } else if (color == "X") {
-     board->fillRectangle(row * 25, col *25, 25, 25, 11);
+     board->fillRectangle(row * 25, col *25, 25, 25, 1);
    }
    
     if (blind) {
