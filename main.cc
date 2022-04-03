@@ -214,10 +214,10 @@ int main(int argc, const char * argv[]) {
                     if (cmd[1] == 'c') { // ccw
                         if(num < 0) num = 1;
                         for(;num > 0;num--) {
-                            if (b.NowPlayer()->ccwPossible){
+                            if (b.NowPlayer()->counterCPossible){
                                 b.NowPlayer()->CurBlock->cclockw();
                             }
-                            b.SetPossibles();
+                            b.updatePossibilities();
                             b.update(b.NowPlayer());
                         
                         }
@@ -225,10 +225,10 @@ int main(int argc, const char * argv[]) {
                     if(cmd[1] == 'l') { // clockwise
                         if(num < 0) num = 1;
                         for(;num > 0;num--) {
-                            if (b.NowPlayer()->cwPossible) {
+                            if (b.NowPlayer()->clockPossible) {
                                 b.NowPlayer()->CurBlock->clockw();
                             }
-                            b.SetPossibles();
+                            b.updatePossibilities();
                             b.update(b.NowPlayer());
                         }
                     }
@@ -236,20 +236,20 @@ int main(int argc, const char * argv[]) {
                     if(cmd[1] == 'o') { // counterclockwise
                         if(num < 0) num = 1;
                         for(;num > 0;num--){
-                            if (b.NowPlayer()->ccwPossible) {
+                            if (b.NowPlayer()->counterCPossible) {
                                 b.NowPlayer()->CurBlock->cclockw();
                             }
-                            b.SetPossibles();
+                            b.updatePossibilities();
                             b.update(b.NowPlayer());
                         }
                     }
                     if (cmd[1] == 'w') { // cw
                         if (num < 0) num = 1;
                         for(;num > 0;num--) {
-                            if (b.NowPlayer()->cwPossible) {
+                            if (b.NowPlayer()->clockPossible) {
                                 b.NowPlayer()->CurBlock->clockw();
                             }
-                            b.SetPossibles();
+                            b.updatePossibilities();
                             b.update(b.NowPlayer());
                         }
                     }
@@ -417,7 +417,7 @@ int main(int argc, const char * argv[]) {
                             cout << "which block? "<< endl;
                             char tempblock;
                             cin >> tempblock;
-                            b.ChangeTurn();//we switch player for now
+                            b.switchPlayer();//we switch player for now
                             shared_ptr<Block> bk = nullptr;
                             switch(tempblock) {
                                 case 'J' : bk = make_shared<JBlock>(); break;
@@ -430,7 +430,7 @@ int main(int argc, const char * argv[]) {
 			                }
                             b.NowPlayer()->CurBlock = bk;
                             //  delete del;
-                            b.ChangeTurn();//and we switch back
+                            b.switchPlayer();//and we switch back
                             break;
                             //end of force
                         } else {
@@ -438,7 +438,7 @@ int main(int argc, const char * argv[]) {
                         }
                     }
                 }
-                b.ChangeTurn();
+                b.switchPlayer();
             }//end  of punishment
             b.ReCalc(b.NowPlayer());
             b.DrawBlock(b.NowPlayer(), b.NowPlayer()->row, b.NowPlayer()->col);

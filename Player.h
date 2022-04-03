@@ -18,7 +18,6 @@
 
 struct Player{
     std::vector <std::vector <Cell>> PlayField;
-    
     std::string name;
     int id;
     int Score;
@@ -29,17 +28,14 @@ struct Player{
     bool RightPossible;
     bool DownPossible;
     int cant_down;
-    // ignore for now
-    //Level *levptr;
     std::unique_ptr<Level> levptr;
-    bool cwPossible;
-    bool ccwPossible;
+    bool clockPossible;
+    bool counterCPossible;
     std::shared_ptr<Block> CurBlock;
     std::shared_ptr<Block> NextBlock;
     
     bool IsAlive;
     int SpeAttack;
-    //int EdgeFlag;
 
     // for score
     int IBlock;
@@ -52,7 +48,6 @@ struct Player{
     
     // for Heavy
     bool heavy;
-    bool reverse;
     
     //for level4
     int notclear = 0;

@@ -18,7 +18,7 @@ BiqBoard::~BiqBoard(){
 
 
 // ********************** initialization **********************
-void BiqBoard::SetPlayer(std::shared_ptr <Player> &player, string playername,int id,int level){
+void BiqBoard::SetPlayer(std::shared_ptr <Player> &player, string playername,int id,int level) {
     
     player->PlayField.resize(15);
     for (int row = 0; row < 15; row++) {
@@ -28,17 +28,17 @@ void BiqBoard::SetPlayer(std::shared_ptr <Player> &player, string playername,int
         }
     }
     //for level
-    if (level == 0){
+    if (level == 0) {
         player->levptr = unique_ptr <Level> (new Level0);
-    }else if (level == 1){
+    } else if (level == 1) {
         player->levptr = unique_ptr <Level> (new Level1);
-    }else if (level == 2){
+    } else if (level == 2) {
         player->levptr= unique_ptr <Level> (new Level2);
-    }else if (level == 3){
+    } else if (level == 3) {
         player->levptr= unique_ptr <Level> (new Level3);
-    }else if (level == 4){
+    } else if (level == 4) {
         player->levptr= unique_ptr <Level> (new Level4);
-    }/*else if (level == 5){
+    } /*else if (level == 5) {
         if (specialOn) player->levptr= unique_ptr <Level> (new Level5);
         else player->levptr= unique_ptr <Level> (new Level4);
     }*/
@@ -57,16 +57,13 @@ void BiqBoard::SetPlayer(std::shared_ptr <Player> &player, string playername,int
     player->SpeAttack = 0;
     player->col = 0;
     player->row = 0;
+    player->cant_down = 0;
     player->LeftPossible = true;
     player->RightPossible = true;
     player->DownPossible = true;
-    player->cwPossible = true;
-    player->ccwPossible = true;
+    player->clockPossible = true;
+    player->counterCPossible = true;
     
-    // this para to solve the second down
-    player->cant_down = 0;
-    
-    // here is for set the player block number
     player->IBlock = 0;
     player->JBlock = 0;
     player->LBlock = 0;
@@ -77,20 +74,15 @@ void BiqBoard::SetPlayer(std::shared_ptr <Player> &player, string playername,int
     
     // for Heavy function
     player->heavy = false;
-    player->reverse = false;
 }
 
-
-
-
-
 // ********************** Get Private Field from board ********************** (it could be delete, no use)
-std::shared_ptr <Player>& BiqBoard::GetPlayer1(){
+std::shared_ptr <Player>& BiqBoard::GetPlayer1() {
     return player1;
     
 }
 
-std::shared_ptr <Player>& BiqBoard::GetPlayer2(){
+std::shared_ptr <Player>& BiqBoard::GetPlayer2() {
     return player2;
 }
 
@@ -99,18 +91,18 @@ std::shared_ptr <Player>& BiqBoard::GetPlayer2(){
 
 
 // ********************** Get Private Field from player **********************
-int BiqBoard::GetCurScore(std::shared_ptr <Player>& player){
+int BiqBoard::GetCurScore(std::shared_ptr <Player>& player) {
     return player->Score;
 }
 
 
 
 
-std::string NumToString(int num){
+std::string NumToString(int num) {
     std::string temp = "";
-    if(num == 0){
+    if(num == 0) {
         temp = "0";
-    }else{
+    } else {
         while(num != 0){
             int con = num % 10;
             switch (con){
@@ -133,7 +125,7 @@ std::string NumToString(int num){
 
 // ********************** Draw the whole Board **********************
 // I add a Xwindow pointer here!!!
-void BiqBoard::DrawBoard(std::shared_ptr <Player>& player1, std::shared_ptr <Player>& player2, Xwindow * board){
+void BiqBoard::DrawBoard(std::shared_ptr <Player>& player1, std::shared_ptr <Player>& player2, Xwindow * board) {
     int temp_col = 0;
     cout << "Level:    " << player1->level << "     " << "Level:    " << player2->level << endl;
     cout << "Score:    " << player1->Score << "     " << "Score:    " << player2->Score << endl;
@@ -181,7 +173,6 @@ void BiqBoard::DrawBoard(std::shared_ptr <Player>& player1, std::shared_ptr <Pla
             
         }
         cout << "     ";
-        //board->fillRectangle((temp_col+200), row *25, 25, 25, 7);
         for (int col2 = 0; col2 < 11; col2++) {
             cout << player2->PlayField[row][col2];
             if (!IsText){
@@ -200,27 +191,25 @@ void BiqBoard::DrawBoard(std::shared_ptr <Player>& player1, std::shared_ptr <Pla
         }
         
     }
-    if (!IsText){
-        for (int i = 18; i < 30; ++i){
-            for (int j = 0; j < 24; ++j){
+    if (!IsText) {
+        for (int i = 18; i < 30; ++i) {
+            for (int j = 0; j < 24; ++j) {
                 board->fillRectangle(j*25, i*25, 25, 25, 16);
             }
-            // DrawNextBlock(player1, player2, board);
         }
     }
-    
     DrawNextBlock(player1, player2, board);
 }
 
 
 
 
-bool BiqBoard::DrawBlock(std::shared_ptr <Player>& player, int x, int y){
+bool BiqBoard::DrawBlock(std::shared_ptr <Player>& player, int x, int y) {
     int block_row = 5;
     int block_col = 4;
     int board_row = 15;
     int board_col = 11;
-    bool ava = CellsAva(player, x, y);
+    bool ava = availableCells(player, x, y);
     vector <vector <string>> v = player->CurBlock->getBlock();
     
     
@@ -252,8 +241,8 @@ bool BiqBoard::DrawBlock(std::shared_ptr <Player>& player, int x, int y){
         player->RightPossible = true;
         player->LeftPossible = true;
         player->DownPossible = true;
-        player->cwPossible = true;
-        player->ccwPossible = true;
+        player->clockPossible = true;
+        player->counterCPossible = true;
         return true;
     }
     return false;
@@ -262,37 +251,31 @@ bool BiqBoard::DrawBlock(std::shared_ptr <Player>& player, int x, int y){
 
 
 void BiqBoard::DrawNextBlock(std::shared_ptr <Player>& player1, std::shared_ptr <Player>& player2, Xwindow * board){
-    std::shared_ptr<Block> py1 = player1->NextBlock;
-    std::shared_ptr<Block> py2 = player2->NextBlock;
-    vector<vector<string>> b1 = py1->getBlock();
-    vector<vector<string>> b2 = py2->getBlock();
+    std::shared_ptr<Block> p1 = player1->NextBlock;
+    std::shared_ptr<Block> p2 = player2->NextBlock;
+    vector<vector<string>> b1 = p1->getBlock();
+    vector<vector<string>> b2 = p2->getBlock();
     
     for (int i = 2; i < 5; ++i){
         for (int j = 0; j < 4; ++j){
             cout << b1[i][j];
             if (!IsText){
-                if (b1[i][j] != " "){
-
-                   if (b1[i][j] == "I") {
-                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 10);
-                   } else if (b1[i][j] == "J"){
-                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 9);
-                   } else if (b1[i][j] == "L"){
-                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 5);
-                   } else if (b1[i][j] == "Z"){
-                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 6);
-                   } else if (b1[i][j] == "S"){
-                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 3);
-                   } else if (b1[i][j] == "O"){
-                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 13);
-                   } else if (b1[i][j] == "T"){
-                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 8);
-                   } else if (b1[i][j] == "C"){
-                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 10);
-                   } else if (b1[i][j] == "X"){
-                      board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 11);
-                   }
-
+                if (b1[i][j] != " ") {
+                    if (b1[i][j] == "I") {
+                        board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 10);
+                    } else if (b1[i][j] == "J"){
+                        board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 9);
+                    } else if (b1[i][j] == "L"){
+                        board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 5);
+                    } else if (b1[i][j] == "Z"){
+                        board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 6);
+                    } else if (b1[i][j] == "S"){
+                        board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 3);
+                    } else if (b1[i][j] == "O"){
+                        board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 13);
+                    } else if (b1[i][j] == "T"){
+                        board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 8);
+                    }
                 }
             }
         }
@@ -301,38 +284,32 @@ void BiqBoard::DrawNextBlock(std::shared_ptr <Player>& player1, std::shared_ptr 
             cout << b2[i][j];
             if (!IsText){
                 if (b2[i][j] != " "){
-                   if (b2[i][j] == "I") {
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 10);
-                   } else if (b2[i][j] == "J"){
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 9);
-                   } else if (b2[i][j] == "L"){
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 5);
-                   } else if (b2[i][j] == "Z"){
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 6);
-                   } else if (b2[i][j] == "S"){
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 3);
-                   } else if (b2[i][j] == "O"){
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 13);
-                   } else if (b2[i][j] == "T"){
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 12);
-                   } else if (b2[i][j] == "C"){
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 2);
-                   } else if (b2[i][j] == "X"){
-                      board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 1);
-                   }
-
+                    if (b2[i][j] == "I") {
+                        board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 10);
+                    } else if (b2[i][j] == "J"){
+                        board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 9);
+                    } else if (b2[i][j] == "L"){
+                        board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 5);
+                    } else if (b2[i][j] == "Z"){
+                        board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 6);
+                    } else if (b2[i][j] == "S"){
+                        board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 3);
+                    } else if (b2[i][j] == "O"){
+                        board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 13);
+                    } else if (b2[i][j] == "T"){
+                        board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 12);
+                    }
                 }
             }
         }
         cout << endl;
     }
-    
 }
 
 
 
 // helper function of DrawBlock
-bool BiqBoard::CellsAva (std::shared_ptr <Player>& player, int x, int y){
+bool BiqBoard::availableCells(std::shared_ptr <Player>& player, int x, int y) {
     int block_row = 5;
     int block_col = 4;
     int board_row = 15;
@@ -361,7 +338,7 @@ bool BiqBoard::CellsAva (std::shared_ptr <Player>& player, int x, int y){
 
 // ********************** switch player **********************
 
-std::shared_ptr <Player>& BiqBoard::NowPlayer(){
+std::shared_ptr <Player>& BiqBoard::NowPlayer() {
     if (turn){
         return player1;
     }else{
@@ -369,7 +346,7 @@ std::shared_ptr <Player>& BiqBoard::NowPlayer(){
     }
 }
 
-std::shared_ptr <Player>& BiqBoard::OtherPlayer(){
+std::shared_ptr <Player>& BiqBoard::OtherPlayer() {
     if (turn){
         return player2;
     }else{
@@ -379,7 +356,7 @@ std::shared_ptr <Player>& BiqBoard::OtherPlayer(){
 
 
 
-void BiqBoard::ChangeTurn(){
+void BiqBoard::switchPlayer() {
     turn = !turn;
 }
 
@@ -401,8 +378,8 @@ void BiqBoard::left(std::shared_ptr <Player>& player){
         player->LeftPossible = true;
         player->DownPossible = true;
     }
-    player->cwPossible = true;
-    player->ccwPossible = true;
+    player->clockPossible = true;
+    player->counterCPossible = true;
 }
 
 
@@ -433,8 +410,8 @@ void BiqBoard::right(std::shared_ptr <Player>& player){
         player->LeftPossible = true;
         player->DownPossible = true;
     }
-    player->cwPossible = true;
-    player->ccwPossible = true;
+    player->clockPossible = true;
+    player->counterCPossible = true;
 }
 
 
@@ -461,8 +438,8 @@ void BiqBoard::down(std::shared_ptr <Player>& player){
         player->LeftPossible = true;
         player->DownPossible = true;
     }
-    player->cwPossible = true;
-    player->ccwPossible = true;
+    player->clockPossible = true;
+    player->counterCPossible = true;
     
 };
 
@@ -478,7 +455,7 @@ void BiqBoard::drop(std::shared_ptr <Player>& player) {
 
 
 
-void BiqBoard::cwpossible(std::shared_ptr <Player>& player){
+void BiqBoard::clockPossible(std::shared_ptr <Player>& player){
     int x = player->row;
     int y = player->col;
     int block_row = 5;
@@ -495,11 +472,11 @@ void BiqBoard::cwpossible(std::shared_ptr <Player>& player){
             int new_row = row + x;
             int new_col = col + y;
             if ((new_col >= 11) && (BlkType == "I")){
-                player->cwPossible = false;
+                player->clockPossible = false;
                 break;
             }
             if ((new_col > 11) && (BlkType != "I")){
-                player->cwPossible = false;
+                player->clockPossible = false;
                 break;
             }
             
@@ -515,7 +492,7 @@ void BiqBoard::cwpossible(std::shared_ptr <Player>& player){
             //cw checkingcw
             
             if (player->PlayField[new_row][new_col].GetColor() != " "){
-                player->cwPossible = false;
+                player->clockPossible = false;
                 break;
             }
         }
@@ -524,7 +501,7 @@ void BiqBoard::cwpossible(std::shared_ptr <Player>& player){
 
 
 
-void BiqBoard::ccwpossible(std::shared_ptr <Player>& player){
+void BiqBoard::counterCPossible(std::shared_ptr <Player>& player){
     int x = player->row;
     int y = player->col;
     int block_row = 5;
@@ -541,11 +518,11 @@ void BiqBoard::ccwpossible(std::shared_ptr <Player>& player){
             int new_row = row + x;
             int new_col = col + y;
             if ((new_col >= 11) && (BlkType == "I")){
-                player->ccwPossible = false;
+                player->counterCPossible = false;
                 break;
             }
             if ((new_col > 11) && (BlkType != "I")){
-                player->ccwPossible = false;
+                player->counterCPossible = false;
                 break;
             }
             
@@ -563,7 +540,7 @@ void BiqBoard::ccwpossible(std::shared_ptr <Player>& player){
             
             
             if (player->PlayField[new_row][new_col].GetColor() != " "){
-                player->ccwPossible = false;
+                player->counterCPossible = false;
                 break;
             }
         }
@@ -573,7 +550,7 @@ void BiqBoard::ccwpossible(std::shared_ptr <Player>& player){
 
 
 // initialize all possible
-void BiqBoard::SetPossibles () {
+void BiqBoard::updatePossibilities () {
     player1->DownPossible = true;
     player1->RightPossible = true;
     player1->LeftPossible = true;
@@ -628,19 +605,8 @@ void BiqBoard::update(std::shared_ptr <Player>& player){
             }
         }
     }
-    
-    cwpossible(player);
-    //cout << "it pass cw possible" << endl;
-    ccwpossible(player);
-    //cout << "it pass ccw possible" << endl;
-    /*
-     cout << "leftpossible: " << player->LeftPossible << endl;
-     cout << "rightpossible: " << player->RightPossible << endl;
-     cout << "downpossible: " << player->DownPossible << endl;
-     cout << "cwpossible: " << player->cwPossible << endl;
-     cout << "ccwpossible: " << player->ccwPossible << endl;
-     */
-    
+    clockPossible(player);
+    counterCPossible(player);
 }
 
 // ********************** clean line **********************

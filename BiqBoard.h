@@ -36,7 +36,7 @@ public:
     bool DrawBlock(std::shared_ptr <Player>& player, int x, int y);
     void DrawNextBlock(std::shared_ptr <Player>& player1, std::shared_ptr <Player>& player2, Xwindow  * board);
     // helper function of DrawBlock
-    bool CellsAva (std::shared_ptr <Player>& player, int x, int y);
+    bool availableCells(std::shared_ptr <Player>& player, int x, int y);
     
     
     // ********************** switch player **********************
@@ -46,7 +46,7 @@ public:
     // This bool is to id which player is playing
     // true for player1, flase for player2
     std::shared_ptr <Player>& NowPlayer();
-    void ChangeTurn();
+    void switchPlayer();
     std::shared_ptr <Player>& OtherPlayer();
     
     // ********************** Left, Right, Down, Drop, CW, CCW**********************
@@ -54,10 +54,10 @@ public:
     void right(std::shared_ptr <Player>& player);
     void down(std::shared_ptr <Player>& player);
     void drop(std::shared_ptr <Player>& player);
-    void cwpossible (std::shared_ptr <Player>& player);
-    void ccwpossible (std::shared_ptr <Player>& player);
+    void clockPossible (std::shared_ptr <Player>& player);
+    void counterCPossible (std::shared_ptr <Player>& player);
     // initialize all possible
-    void SetPossibles ();
+    void updatePossibilities();
     // update all possible
     void update(std::shared_ptr <Player>& player);
     
