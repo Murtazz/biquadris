@@ -7,7 +7,7 @@ void drawPixel(int a, int b, Xwindow& board) {
     int x = 10;
     int y = 50;
     int w = 16;
-    int c = 9;
+    int c = 5;
     
     board.fillRectangle(x + w*a, y + w*b  ,w , w , c);
 }
@@ -18,7 +18,7 @@ void drawInBoard(Xwindow &board) {
 
     std::string s1;
 
-    int bg = 6;
+    int bg = 1;
     //Coverpage
     while(1) {
         // start game
@@ -119,12 +119,12 @@ void drawInBoard(Xwindow &board) {
         string line5 = "clockwise(cw) and counterclockwise(ccw).";
         string line6 = "Have fun! ";
 
-        board.drawString(100, 250, line1, 9);
-        board.drawString(100, 280, line2, 9);
-        board.drawString(100, 310, line3, 9);
-        board.drawString(100, 340, line4, 9);
-        board.drawString(100, 370, line5, 9);
-        board.drawString(100, 400, line6, 9);
+        board.drawString(100, 250, line1, 5);
+        board.drawString(100, 280, line2, 5);
+        board.drawString(100, 310, line3, 5);
+        board.drawString(100, 340, line4, 5);
+        board.drawString(100, 370, line5, 5);
+        board.drawString(100, 400, line6, 5);
         
         //hint
         string c = "Press anykey to continue! ";
@@ -133,5 +133,5 @@ void drawInBoard(Xwindow &board) {
         if(cin >> s1) break;
     }
     
-    board.fillRectangle( 0 , 0 , 600 , 550 , bg);
+    board.fillRectangle(0, 0, 600, 550, bg);
 }
