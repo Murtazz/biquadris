@@ -34,7 +34,6 @@ string norstring;
 string seqstring;
 int seedNum = 111;
 bool seedFree = false;
-bool sound = false;
 bool specialOn = false;
 
 
@@ -102,7 +101,7 @@ int main(int argc, const char * argv[]) {
     }
 
     Xwindow board(600, 550);
-    drawMainBoard(board, sound);
+    drawInBoard(board);
 
 
     // default/initial settings for Players
@@ -401,7 +400,7 @@ int main(int argc, const char * argv[]) {
         
             if (b.DrawBlock(b.NowPlayer(), b.NowPlayer()->row, b.NowPlayer()->col)) {
                 b.NowPlayer()->NextBlock  = b.NowPlayer()->levptr->GetBlock(b.NowPlayer());
-                int clear_rows = b.Recalculate(b.NowPlayer(), sound);
+                int clear_rows = b.ReCalc(b.NowPlayer());
                 if (clear_rows >= 2) {
                     string cmd2;
                     cout << "Which Punishment you want to choice: blind || heavy || force";
@@ -421,13 +420,13 @@ int main(int argc, const char * argv[]) {
                             b.ChangeTurn();//we switch player for now
                             shared_ptr<Block> bk = nullptr;
                             switch(tempblock) {
-                                case 'J' : bk = make_shared<JBlock>();break;
-                                case 'O' : bk = make_shared<OBlock>();break;
-                                case 'L' : bk = make_shared<LBlock>();break;
-                                case 'I' : bk = make_shared<IBlock>();break;
-                                case 'S' : bk = make_shared<SBlock>();break;
-                                case 'Z' : bk = make_shared<ZBlock>();break;
-                                case 'T' : bk = make_shared<TBlock>();break;
+                                case 'J' : bk = make_shared<JBlock>(); break;
+                                case 'O' : bk = make_shared<OBlock>(); break;
+                                case 'L' : bk = make_shared<LBlock>(); break;
+                                case 'I' : bk = make_shared<IBlock>(); break;
+                                case 'S' : bk = make_shared<SBlock>(); break;
+                                case 'Z' : bk = make_shared<ZBlock>(); break;
+                                case 'T' : bk = make_shared<TBlock>(); break;
 			                }
                             b.NowPlayer()->CurBlock = bk;
                             //  delete del;
@@ -441,7 +440,7 @@ int main(int argc, const char * argv[]) {
                 }
                 b.ChangeTurn();
             }//end  of punishment
-            b.Recalculate(b.NowPlayer(), sound);
+            b.ReCalc(b.NowPlayer());
             b.DrawBlock(b.NowPlayer(), b.NowPlayer()->row, b.NowPlayer()->col);
             b.DrawBoard(player1, player2, &board);
             seqList.pop_back();

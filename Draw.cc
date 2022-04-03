@@ -3,143 +3,112 @@ using namespace std;
 
 
 
-void drawPx(int a, int b, Xwindow& board){
+void drawPixel(int a, int b, Xwindow& board) {
     int x = 10;
     int y = 50;
     int w = 16;
     int c = 9;
     
     board.fillRectangle(x + w*a, y + w*b  ,w , w , c);
-    
 }
 
 
-void drawMainBoard(Xwindow &board, bool sound) {
+void drawInBoard(Xwindow &board) {
     
 
     std::string s1;
 
     int bg = 6;
     //Coverpage
-    while(1){
-        //we end(actually start game here)
+    while(1) {
+        // start game
         
         //background
         board.fillRectangle( 0 , 0 , 600 , 550 , bg);
         
-        //title
-        
+        // title screen
         //b
-        
-        //drawPx(0,-1,board);
-        drawPx(3,0,board);
-        drawPx(3,1,board);
-        drawPx(3,2,board);
-        drawPx(3,3,board);
-        drawPx(3,4,board);
-        drawPx(3,5,board);
-        drawPx(3,6,board);
-        //drawPx(0,6,board);
-        drawPx(4,6,board);
-        drawPx(5,6,board);
-        //drawPx(4,6,board);
-        //drawPx(5,6,board);
-        drawPx(5,5,board);
-        drawPx(5,4,board);
-        //drawPx(3,3,board);
-        //drawPx(3,3,board);
-        drawPx(4,4,board);
-        //drawPx(4,2,board);
-        //drawPx(2,3,board);
-        //drawPx(4,1,board);
-        //drawPx(4,0,board);
-        //drawPx(3,0,board);
-        //drawPx(2,0,board);
+        drawPixel(3,0,board);
+        drawPixel(3,1,board);
+        drawPixel(3,2,board);
+        drawPixel(3,3,board);
+        drawPixel(3,4,board);
+        drawPixel(3,5,board);
+        drawPixel(3,6,board);
+        drawPixel(4,6,board);
+        drawPixel(5,6,board);
+        drawPixel(5,5,board);
+        drawPixel(5,4,board);
+        drawPixel(4,4,board);
         
         //i
-        
-        drawPx(7,2,board);
-        //drawPx(6,3,board);
-        drawPx(7,4,board);
-        drawPx(7,5,board);
-        drawPx(7,6,board);
+        drawPixel(7,2,board);
+        drawPixel(7,4,board);
+        drawPixel(7,5,board);
+        drawPixel(7,6,board);
         
         //q
-        
-        //drawPx(12,3,board);
-        drawPx(11,4,board);
-        drawPx(10,4,board);
-        drawPx(9,4,board);
-        drawPx(9,5,board);
-        drawPx(9,6,board);
-        drawPx(10,6,board);
-        drawPx(11,5,board);
-        drawPx(11,6,board);
-        drawPx(11,7,board);
-        drawPx(11,8,board);
-        //drawPx(12,9,board);
+        drawPixel(11,4,board);
+        drawPixel(10,4,board);
+        drawPixel(9,4,board);
+        drawPixel(9,5,board);
+        drawPixel(9,6,board);
+        drawPixel(10,6,board);
+        drawPixel(11,5,board);
+        drawPixel(11,6,board);
+        drawPixel(11,7,board);
+        drawPixel(11,8,board);
         
         //u
-        
-        drawPx(13,4,board);
-        drawPx(13,5,board);
-        drawPx(13,6,board);
-        drawPx(14,6,board);
-        drawPx(15,6,board);
-        drawPx(15,5,board);
-        drawPx(15,4,board);
+        drawPixel(13,4,board);
+        drawPixel(13,5,board);
+        drawPixel(13,6,board);
+        drawPixel(14,6,board);
+        drawPixel(15,6,board);
+        drawPixel(15,5,board);
+        drawPixel(15,4,board);
         
         //a
-        
-        //drawPx(20,3,board);
-        //drawPx(19,4,board);
-        drawPx(18,4,board);
-        //drawPx(17,4,board);
-        drawPx(17,5,board);
-        //drawPx(17,6,board);
-        drawPx(18,6,board);
-        drawPx(19,6,board);
-        drawPx(19,5,board);
-        //drawPx(20,7,board);
+        drawPixel(18,4,board);
+        drawPixel(17,5,board);
+        drawPixel(18,6,board);
+        drawPixel(19,6,board);
+        drawPixel(19,5,board);
         
         //d
-        drawPx(22,4,board);
-        drawPx(21,4,board);
-        drawPx(21,5,board);
-        drawPx(21,6,board);
-        drawPx(22,6,board);
-        drawPx(23,1,board);
-        drawPx(23,2,board);
-        drawPx(23,3,board);
-        drawPx(23,4,board);
-        drawPx(23,5,board);
-        drawPx(23,6,board);
-        //drawPx(24,7,board);
+        drawPixel(22,4,board);
+        drawPixel(21,4,board);
+        drawPixel(21,5,board);
+        drawPixel(21,6,board);
+        drawPixel(22,6,board);
+        drawPixel(23,1,board);
+        drawPixel(23,2,board);
+        drawPixel(23,3,board);
+        drawPixel(23,4,board);
+        drawPixel(23,5,board);
+        drawPixel(23,6,board);
         
         
         //r
-        drawPx(25,4,board);
-        drawPx(26,5,board);
-        drawPx(26,6,board);
-        //drawPx(26,4,board);
-        drawPx(27,4,board);
+        drawPixel(25,4,board);
+        drawPixel(26,5,board);
+        drawPixel(26,6,board);
+        drawPixel(27,4,board);
         
         //i
-        drawPx(29,2,board);
-        //drawPx(28,3,board);
-        drawPx(29,4,board);
-        drawPx(29,5,board);
-        drawPx(29,6,board);
+        drawPixel(29,2,board);
+        drawPixel(29,4,board);
+        drawPixel(29,5,board);
+        drawPixel(29,6,board);
         
         //s
-        drawPx(33,3,board);
-        drawPx(32,3,board);
-        drawPx(31,4,board);
-        //drawPx(31,5,board);
-        drawPx(32,5,board);
-        drawPx(33,6,board);
-        drawPx(32,7,board);
-        drawPx(31,7,board);
+        drawPixel(33,3,board);
+        drawPixel(32,3,board);
+        drawPixel(31,4,board);
+        drawPixel(32,5,board);
+        drawPixel(33,6,board);
+        drawPixel(32,7,board);
+        drawPixel(31,7,board);
         
 
             
@@ -161,33 +130,8 @@ void drawMainBoard(Xwindow &board, bool sound) {
         string c = "Press anykey to continue! ";
         board.drawString(225, 530, c, 7);
         
-        
-        
         if(cin >> s1) break;
     }
     
-   
-    /*
-    while(1){
-        //here is about the rules
-        board.fillRectangle( 0 , 0 , 600 , 550 , bg);
-        
-        //words
-        
-
-    //    std::string line8 = "test ";
-    //    board.drawString( 80 , 450 , line8,4);
-
-// board.drawString( 400 , 550 , s);
-
-       
-        //
-        string r = "Press anykey to start /(* ` b `)/";
-        board.drawString( 175 , 530  , r);
-        
-        if(std::cin >> s1) break;
-    }
-    */
-    
-  board.fillRectangle( 0 , 0 , 600 , 550 , bg);
+    board.fillRectangle( 0 , 0 , 600 , 550 , bg);
 }

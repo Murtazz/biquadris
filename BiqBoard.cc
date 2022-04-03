@@ -644,7 +644,7 @@ void BiqBoard::update(std::shared_ptr <Player>& player){
 }
 
 // ********************** clean line **********************
-int BiqBoard::Recalculate(std::shared_ptr <Player>& player, bool sound) {
+int BiqBoard::ReCalc(std::shared_ptr <Player>& player) {
     vector < int > clean_row;
     for (int row = 14; row > 0 ; row-- ) {
         int num_dead_cell = 0;
@@ -688,14 +688,14 @@ int BiqBoard::Recalculate(std::shared_ptr <Player>& player, bool sound) {
     
     
     if (clean_row.size() != 0) {
-        ClearLine(player, clean_row, sound);
+        ClearLine(player, clean_row);
     }
     return a;
 }
 
 
 
-void BiqBoard::ClearLine(std::shared_ptr <Player>& player,  vector< int > & clean_row, bool sound){
+void BiqBoard::ClearLine(std::shared_ptr <Player>& player,  vector< int > & clean_row){
     vector < vector < Cell> > new_PlayField;
     int num_clean_row = clean_row.size();
     int x = 0;

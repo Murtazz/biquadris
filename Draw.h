@@ -6,8 +6,8 @@
 
 
 
-void drawPx(int a, int b, Xwindow& board);
+void drawPixel(int a, int b, Xwindow& board);
 
-void drawMainBoard(Xwindow &board, bool sound);
+void drawInBoard(Xwindow &board);
 
 #endif
