@@ -1,9 +1,5 @@
 #ifndef __JBLOCK_H__
 #define __JBLOCK_H__
-#include <iostream>
-#include <string>
-#include <memory>
-#include <vector>
 #include "Block.h"
 
 class JBlock : public Block {
@@ -18,10 +14,8 @@ public:
     ~JBlock();
     void print() override;
     std::vector<std::vector <std::string>> getBlock() override;
-    JBlock* clone () override;
-    std::unique_ptr<JBlock> Aclone() {
-        return std::unique_ptr<JBlock> (this->clone());
-    }
+    JBlock* copyBlock() override;
+    std::unique_ptr<JBlock> blockCpy();
     std::string GetType() override;
 };
 

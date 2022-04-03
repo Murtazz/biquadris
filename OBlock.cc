@@ -3,10 +3,10 @@ using namespace std;
 
 
 
-OBlock::OBlock(){
+OBlock::OBlock() {
     currentRotation= 0;
     v.resize(5);
-    for (int i = 0; i < 4; ++i){
+    for (int i = 0; i < 4; ++i) {
         v.resize(4);
     }
     v = {
@@ -18,31 +18,33 @@ OBlock::OBlock(){
     };
 }
 
-OBlock::~OBlock(){
-}
-void OBlock::clockw(){
-};
+OBlock::~OBlock() {}
 
-void OBlock:: cclockw(){
-};
+void OBlock::clockw() {}
 
-void OBlock::print(){
-    for (int i = 0; i < 5; ++i){
-        for (int j = 0; j < 4; ++j){
+void OBlock:: cclockw() {}
+
+void OBlock::print() {
+    for (int i = 0; i < 5; ++i) {
+        for (int j = 0; j < 4; ++j) {
             cout << v[i][j];
         }
         cout << endl;
     }
 }
 
-vector<vector <string>> OBlock::getBlock(){
+vector<vector <string>> OBlock::getBlock() {
     return this->v;
 }
 
-OBlock* OBlock::clone (){
-    return new OBlock (*this);
+OBlock* OBlock::copyBlock() {
+    return new OBlock(*this);
 }
 
-string OBlock::GetType (){
+unique_ptr<OBlock> OBlock::blockCpy() {
+    return unique_ptr<OBlock> (this->copyBlock());
+}
+
+string OBlock::GetType() {
     return BlockType;
 }

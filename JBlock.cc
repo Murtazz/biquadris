@@ -28,8 +28,7 @@ void JBlock::clockw() {
             {"J", " ", " ", " "},
         };
         currentRotation = 1;
-    }
-    else if (currentRotation == 1) {
+    } else if (currentRotation == 1) {
         v = {
             {" ", " ", " ", " "},
             {" ", " ", " ", " "},
@@ -38,8 +37,7 @@ void JBlock::clockw() {
             {" ", " ", "J", " "},
         };
         currentRotation = 2;
-    }
-    else if (currentRotation == 2) {
+    } else if (currentRotation == 2) {
         v = {
             {" ", " ", " ", " "},
             {" ", " ", " ", " "},
@@ -48,8 +46,7 @@ void JBlock::clockw() {
             {"J", "J", " ", " "},
         };
         currentRotation = 3;
-    }
-    else {
+    } else {
         v = {
             {" ", " ", " ", " "},
             {" ", " ", " ", " "},
@@ -80,8 +77,12 @@ vector<vector <string>> JBlock::getBlock() {
     return this->v;
 }
 
-JBlock* JBlock::clone() {
-    return new JBlock (*this);
+JBlock* JBlock::copyBlock() {
+    return new JBlock(*this);
+}
+
+unique_ptr<JBlock> JBlock::blockCpy() {
+    return unique_ptr<JBlock> (this->copyBlock());
 }
 
 string JBlock::GetType() {

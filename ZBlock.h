@@ -1,9 +1,5 @@
 #ifndef __ZBLOCK_H__
 #define __ZBLOCK_H__
-#include <iostream>
-#include <string>
-#include <memory>
-#include <vector>
 #include "Block.h"
 
 class ZBlock: public Block{
@@ -18,10 +14,8 @@ public:
     ~ZBlock();
     void print() override;
     std::vector<std::vector <std::string>> getBlock() override;
-    ZBlock* clone() override;
-    std::unique_ptr<ZBlock> Aclone() {
-        return std::unique_ptr<ZBlock> (this->clone());
-    }
+    ZBlock* copyBlock() override;
+    std::unique_ptr<ZBlock> blockCpy();
     std::string GetType () override;
 };
 

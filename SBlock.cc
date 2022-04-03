@@ -5,7 +5,7 @@ using namespace std;
 SBlock::SBlock() {
     currentRotation = 0;
     v.resize(5);
-    for (int i = 0; i < 4; ++i){
+    for (int i = 0; i < 4; ++i) {
         v.resize(4);
     }
     v = {
@@ -29,8 +29,7 @@ void SBlock::clockw() {
             {" ", "S", " ", " "},
         };
         currentRotation = 1;
-    }
-    else {
+    } else {
         v = {
             {" ", " ", " ", " "},
             {" ", " ", " ", " "},
@@ -61,8 +60,12 @@ vector<vector <string>> SBlock::getBlock() {
     return this->v;
 }
 
-SBlock* SBlock::clone() {
-    return new SBlock (*this);
+SBlock* SBlock::copyBlock() {
+    return new SBlock(*this);
+}
+
+unique_ptr<SBlock> SBlock::blockCpy() {
+    return unique_ptr<SBlock> (this->copyBlock());
 }
 
 string SBlock::GetType() {

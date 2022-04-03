@@ -1,10 +1,6 @@
 #ifndef __OBLOCK_H__
 #define __OBLOCK_H__
 #include "Block.h"
-#include <string>
-#include <iostream>
-#include <vector>
-
 
 class OBlock : public Block{
     std::string BlockType = "O";
@@ -16,13 +12,11 @@ public:
     void  cclockw() override;
     OBlock();
     ~OBlock();
-    void print () override;
+    void print() override;
     std::vector<std::vector <std::string>> getBlock() override;
-    OBlock* clone () override;
-    std::unique_ptr<OBlock> Aclone() {
-        return std::unique_ptr<OBlock> (this->clone());
-    }
-    std::string GetType () override;
+    OBlock* copyBlock() override;
+    std::unique_ptr<OBlock> blockCpy();
+    std::string GetType() override;
 };
 
 #endif

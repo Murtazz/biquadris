@@ -1,12 +1,10 @@
 #include "LBlock.h"
-#include <iostream>
 using namespace std;
 
-
-LBlock::LBlock(){
+LBlock::LBlock() {
     currentRotation = 0;
     v.resize(5);
-    for (int i = 0; i < 4; ++i){
+    for (int i = 0; i < 4; ++i) {
         v.resize(4);
     }
     v = {
@@ -18,10 +16,10 @@ LBlock::LBlock(){
     };
 }
 
-LBlock::~LBlock(){
-}
-void LBlock::clockw(){
-    if (currentRotation == 0){
+LBlock::~LBlock() {}
+
+void LBlock::clockw() {
+    if (currentRotation == 0) {
         v = {
                 {" ", " ", " ", " "},
                 {" ", " ", " ", " "},
@@ -30,8 +28,7 @@ void LBlock::clockw(){
                 {"L", "L", " ", " "},
             };
         currentRotation = 1;
-    }
-    else if (currentRotation == 1){
+    } else if (currentRotation == 1) {
         v = {
             {" ", " ", " ", " "},
             {" ", " ", " ", " "},
@@ -40,8 +37,7 @@ void LBlock::clockw(){
             {"L", " ", " ", " "},
         };
         currentRotation = 2;
-    }
-    else if (currentRotation == 2){
+    } else if (currentRotation == 2) {
         v = {
             {" ", " ", " ", " "},
             {" ", " ", " ", " "},
@@ -50,8 +46,7 @@ void LBlock::clockw(){
             {" ", "L", " ", " "},
         };
         currentRotation = 3;
-    }
-    else {
+    } else {
         v = {
             {" ", " ", " ", " "},
             {" ", " ", " ", " "},
@@ -61,17 +56,17 @@ void LBlock::clockw(){
         };
         currentRotation = 0;
     }
-};
+}
 
 void LBlock:: cclockw() {
     clockw();
     clockw();
     clockw();
-};
+}
 
 void LBlock::print() {
-    for (int i = 0; i < 5; ++i){
-        for (int j = 0; j < 4; ++j){
+    for (int i = 0; i < 5; ++i) {
+        for (int j = 0; j < 4; ++j) {
             cout << v[i][j];
         }
         cout << endl;
@@ -82,10 +77,12 @@ vector<vector <string>> LBlock::getBlock() {
     return this->v;
 }
 
-LBlock* LBlock::clone() {
-    return new LBlock (*this);
+LBlock* LBlock::copyBlock() {
+    return new LBlock(*this);
 }
-
+unique_ptr<LBlock> LBlock::blockCpy() {
+    return unique_ptr<LBlock> (this->copyBlock());
+}
 string LBlock::GetType() {
     return BlockType;
 }

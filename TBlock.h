@@ -1,11 +1,6 @@
 #ifndef __TBLOCK_H__
 #define __TBLOCK_H__
-
-#include "TBlock.h"
 #include "Block.h"
-#include <string>
-#include <iostream>
-#include <vector>
 class TBlock : public Block{
     std::string BlockType = "T";
     int currentRotation;
@@ -16,12 +11,10 @@ public:
     void cclockw() override;
     TBlock();
     ~TBlock();
-    void print () override;
+    void print() override;
     std::vector<std::vector <std::string>> getBlock() override;
-    TBlock* clone () override;
-    std::unique_ptr<TBlock> Aclone() {
-        return std::unique_ptr<TBlock> (this->clone());
-    }
+    TBlock* copyBlock() override;
+    std::unique_ptr<TBlock> blockCpy();
     std::string GetType () override;
 };
 

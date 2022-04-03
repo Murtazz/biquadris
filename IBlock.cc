@@ -1,11 +1,10 @@
 #include "IBlock.h"
-
 using namespace std;
 
-IBlock:: IBlock(){
+IBlock:: IBlock() {
     currentRotation = 0;
     v.resize(5);
-    for (int i = 0; i < 4; ++i){
+    for (int i = 0; i < 4; ++i) {
         v.resize(4);
     }
     v = {
@@ -15,13 +14,12 @@ IBlock:: IBlock(){
         {"I", "I", "I", "I"},
         {" ", " ", " ", " "},
     }; 
-
 }
 
-IBlock::~IBlock(){}
+IBlock::~IBlock() {}
 
-void IBlock::clockw(){
-    if (currentRotation == 1){
+void IBlock::clockw() {
+    if (currentRotation == 1) {
         v = {
             {" ", " ", " ", " "},
             {" ", " ", " ", " "},
@@ -30,8 +28,7 @@ void IBlock::clockw(){
             {" ", " ", " ", " "},
         };
         currentRotation = 0;
-    }
-    else {
+    } else {
         v = {
             {"I", " ", " ", " "},
             {"I", " ", " ", " "},
@@ -41,10 +38,10 @@ void IBlock::clockw(){
         };
         currentRotation = 1;
     }
-};
+}
 
-void  IBlock::cclockw(){
-   if ( currentRotation == 1){
+void  IBlock::cclockw() {
+   if ( currentRotation == 1) {
         v = {
             {"I", " ", " ", " "},
             {"I", " ", " ", " "},
@@ -53,8 +50,7 @@ void  IBlock::cclockw(){
             {" ", " ", " ", " "},
         };
         currentRotation = 0;
-    }
-    else {
+    } else {
         v = {
             {" ", " ", " ", " "},
             {" ", " ", " ", " "},
@@ -66,7 +62,7 @@ void  IBlock::cclockw(){
     } 
 }
 
-void IBlock::print(){
+void IBlock::print() {
     for (int i = 0; i < 5; ++i){
         for (int j = 0; j < 4; ++j){
             cout << v[i][j];
@@ -75,15 +71,18 @@ void IBlock::print(){
     }
 }
 
-
-vector<vector <string>> IBlock::getBlock(){
+vector<vector <string>> IBlock::getBlock() {
     return this->v;
 }
 
-IBlock* IBlock::clone (){
-    return new IBlock (*this);
+IBlock* IBlock::copyBlock() {
+    return new IBlock(*this);
 }
 
-string IBlock::GetType (){
+unique_ptr<IBlock> IBlock::blockCpy() {
+    return std::unique_ptr<IBlock> (this->copyBlock());
+}
+
+string IBlock::GetType() {
     return BlockType;
 }

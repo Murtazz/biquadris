@@ -1,9 +1,5 @@
 #ifndef __SBLOCK_H__
 #define __SBLOCK_H__
-#include <iostream>
-#include <string>
-#include <memory>
-#include <vector>
 #include "Block.h"
 
 class SBlock: public Block {
@@ -18,10 +14,8 @@ public:
     ~SBlock();
     void print() override;
     std::vector<std::vector <std::string>> getBlock() override;
-    SBlock* clone() override;
-    std::unique_ptr<SBlock> Aclone() {
-        return std::unique_ptr<SBlock> (this->clone());
-    }
+    SBlock* copyBlock() override;
+    std::unique_ptr<SBlock> blockCpy();
     std::string GetType() override;
 };
 

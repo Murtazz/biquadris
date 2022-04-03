@@ -485,7 +485,7 @@ void BiqBoard::cwpossible(std::shared_ptr <Player>& player){
     int block_col = 4;
     int board_row = 15;
     int board_col = 11;
-    shared_ptr<Block>copy = player->CurBlock->Aclone();
+    shared_ptr<Block>copy = player->CurBlock->blockCpy();
     copy->clockw();
     string BlockType = copy->GetType();
     
@@ -531,7 +531,7 @@ void BiqBoard::ccwpossible(std::shared_ptr <Player>& player){
     int block_col = 4;
     int board_row = 15;
     int board_col = 11;
-    shared_ptr<Block>copy = player->CurBlock->Aclone();
+    shared_ptr<Block>copy = player->CurBlock->blockCpy();
     copy->cclockw();
     string BlockType = copy->GetType();
     

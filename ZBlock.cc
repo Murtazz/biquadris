@@ -29,8 +29,7 @@ void ZBlock::clockw() {
             {"Z", " ", " ", " "},
         };
         currentRotation = 1;
-    }
-    else {
+    } else {
         v = {
             {" ", " ", " ", " "},
             {" ", " ", " ", " "},
@@ -61,8 +60,12 @@ vector<vector <string>> ZBlock::getBlock() {
     return this->v;
 }
 
-ZBlock* ZBlock::clone() {
-    return new ZBlock (*this);
+ZBlock* ZBlock::copyBlock() {
+    return new ZBlock(*this);
+}
+
+unique_ptr<ZBlock> ZBlock::blockCpy() {
+    return unique_ptr<ZBlock> (this->copyBlock());
 }
 
 string ZBlock::GetType() {
