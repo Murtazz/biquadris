@@ -83,6 +83,6 @@ unique_ptr<IBlock> IBlock::blockCpy() {
     return std::unique_ptr<IBlock> (this->copyBlock());
 }
 
-string IBlock::GetType() {
-    return BlockType;
+string IBlock::Type() {
+    return BlkType;
 }

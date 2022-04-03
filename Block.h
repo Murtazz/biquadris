@@ -22,7 +22,7 @@ public:
     std::shared_ptr<Block> blockCpy() {
         return std::shared_ptr<Block> (this->copyBlock());
     }
-    virtual std::string GetType() = 0;
+    virtual std::string Type() = 0;
 };
 
 #endif

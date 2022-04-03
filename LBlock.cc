@@ -83,6 +83,6 @@ LBlock* LBlock::copyBlock() {
 unique_ptr<LBlock> LBlock::blockCpy() {
     return unique_ptr<LBlock> (this->copyBlock());
 }
-string LBlock::GetType() {
-    return BlockType;
+string LBlock::Type() {
+    return BlkType;
 }

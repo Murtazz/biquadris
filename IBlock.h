@@ -2,7 +2,7 @@
 #define __IBLOCK_H__
 #include "Block.h"
 class IBlock : public Block{
-    std::string BlockType = "I";
+    std::string BlkType = "I";
     int currentRotation;
 protected:
     std::vector<std::vector <std::string>> v;
@@ -15,7 +15,7 @@ public:
     std::vector<std::vector <std::string>> getBlock() override;
     IBlock* copyBlock() override;
     std::unique_ptr<IBlock> blockCpy();
-    std::string GetType() override;
+    std::string Type() override;
 };
 
 #endif

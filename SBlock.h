@@ -3,7 +3,7 @@
 #include "Block.h"
 
 class SBlock: public Block {
-    std::string BlockType = "S";
+    std::string BlkType = "S";
     int currentRotation;
 protected:
     std::vector<std::vector <std::string>> v;
@@ -16,7 +16,7 @@ public:
     std::vector<std::vector <std::string>> getBlock() override;
     SBlock* copyBlock() override;
     std::unique_ptr<SBlock> blockCpy();
-    std::string GetType() override;
+    std::string Type() override;
 };
 
 #endif 

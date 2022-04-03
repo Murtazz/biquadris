@@ -2,7 +2,7 @@
 #define __TBLOCK_H__
 #include "Block.h"
 class TBlock : public Block{
-    std::string BlockType = "T";
+    std::string BlkType = "T";
     int currentRotation;
 protected:
     std::vector<std::vector <std::string>> v;
@@ -15,7 +15,7 @@ public:
     std::vector<std::vector <std::string>> getBlock() override;
     TBlock* copyBlock() override;
     std::unique_ptr<TBlock> blockCpy();
-    std::string GetType () override;
+    std::string Type () override;
 };
 
 

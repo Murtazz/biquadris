@@ -487,18 +487,18 @@ void BiqBoard::cwpossible(std::shared_ptr <Player>& player){
     int board_col = 11;
     shared_ptr<Block>copy = player->CurBlock->blockCpy();
     copy->clockw();
-    string BlockType = copy->GetType();
+    string BlkType = copy->Type();
     
     for (int row = 0; row < block_row; ++ row) {
         for (int col = 0; col < block_col; ++ col) {
             
             int new_row = row + x;
             int new_col = col + y;
-            if ((new_col >= 11) && (BlockType == "I")){
+            if ((new_col >= 11) && (BlkType == "I")){
                 player->cwPossible = false;
                 break;
             }
-            if ((new_col > 11) && (BlockType != "I")){
+            if ((new_col > 11) && (BlkType != "I")){
                 player->cwPossible = false;
                 break;
             }
@@ -533,18 +533,18 @@ void BiqBoard::ccwpossible(std::shared_ptr <Player>& player){
     int board_col = 11;
     shared_ptr<Block>copy = player->CurBlock->blockCpy();
     copy->cclockw();
-    string BlockType = copy->GetType();
+    string BlkType = copy->Type();
     
     for (int row = 0; row < block_row; ++ row) {
         for (int col = 0; col < block_col; ++ col) {
             
             int new_row = row + x;
             int new_col = col + y;
-            if ((new_col >= 11) && (BlockType == "I")){
+            if ((new_col >= 11) && (BlkType == "I")){
                 player->ccwPossible = false;
                 break;
             }
-            if ((new_col > 11) && (BlockType != "I")){
+            if ((new_col > 11) && (BlkType != "I")){
                 player->ccwPossible = false;
                 break;
             }
@@ -929,7 +929,7 @@ bool BiqBoard::GameOver (std::shared_ptr <Player>& player) {
     string five3 = player->PlayField[4][3].GetColor();
     
     
-    if ((player->NextBlock->GetType() == "I")&&
+    if ((player->NextBlock->Type() == "I")&&
         (((four0 != " ") && (!four0bool)) ||
          ((four1 != " ") && (!four1bool)) ||
          ((four2 != " ") && (!four2bool)) ||
@@ -937,7 +937,7 @@ bool BiqBoard::GameOver (std::shared_ptr <Player>& player) {
             // cout << "I here" << endl;
             return false;
         }
-    if ((player->NextBlock->GetType() == "O")&&
+    if ((player->NextBlock->Type() == "O")&&
         (((four0 != " ") && (!four0bool))||
          ((four1 != " ") && (!four1bool))||
          ((five0 != " ") && (!five0bool))||
@@ -945,7 +945,7 @@ bool BiqBoard::GameOver (std::shared_ptr <Player>& player) {
             //cout << "O here" << endl;
             return false;
         }
-    if ((player->NextBlock->GetType() == "T")&&
+    if ((player->NextBlock->Type() == "T")&&
         (((four1 != " ") && (!four1bool))||
          ((five0 != " ") && (!five0bool))||
          ((five1 != " ") && (!five1bool))||
@@ -953,7 +953,7 @@ bool BiqBoard::GameOver (std::shared_ptr <Player>& player) {
             //cout << "T here" << endl;
             return false;
         }
-    if ((player->NextBlock->GetType() == "L")&&
+    if ((player->NextBlock->Type() == "L")&&
         (((four3 != " ") && (!four3bool))||
          ((five0 != " ") && (!five0bool))||
          ((five1 != " ") && (!five1bool))||
@@ -961,7 +961,7 @@ bool BiqBoard::GameOver (std::shared_ptr <Player>& player) {
             //cout << "L here" << endl;
             return false;
         }
-    if ((player->NextBlock->GetType() == "J")&&
+    if ((player->NextBlock->Type() == "J")&&
         (((four0 != " ") && (!four0bool))||
          ((five0 != " ") && (!five0bool))||
          ((five1 != " ") && (!five1bool))||
@@ -969,7 +969,7 @@ bool BiqBoard::GameOver (std::shared_ptr <Player>& player) {
             //cout << "J here" << endl;
             return false;
         }
-    if ((player->NextBlock->GetType() == "Z")&&
+    if ((player->NextBlock->Type() == "Z")&&
         (((four0 != " ") && (!four0bool))||
          ((four1 != " ") && (!four1bool))||
          ((five1 != " ") && (!five1bool))||
@@ -977,7 +977,7 @@ bool BiqBoard::GameOver (std::shared_ptr <Player>& player) {
             //cout << "Z here" << endl;
             return false;
         }
-    if ((player->NextBlock->GetType() == "S")&&
+    if ((player->NextBlock->Type() == "S")&&
         (((four1 != " ") && (!four1bool))||
          ((four2 != " ") && (!four2bool))||
          ((five0 != " ") && (!five0bool))||

@@ -85,6 +85,6 @@ unique_ptr<TBlock> TBlock::blockCpy() {
     return unique_ptr<TBlock> (this->copyBlock());
 }
 
-string TBlock::GetType() {
-    return BlockType;
+string TBlock::Type() {
+    return BlkType;
 }

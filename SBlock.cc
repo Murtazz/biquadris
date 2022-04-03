@@ -68,6 +68,6 @@ unique_ptr<SBlock> SBlock::blockCpy() {
     return unique_ptr<SBlock> (this->copyBlock());
 }
 
-string SBlock::GetType() {
-    return BlockType;
+string SBlock::Type() {
+    return BlkType;
 }

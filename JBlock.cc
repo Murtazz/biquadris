@@ -85,6 +85,6 @@ unique_ptr<JBlock> JBlock::blockCpy() {
     return unique_ptr<JBlock> (this->copyBlock());
 }
 
-string JBlock::GetType() {
-    return BlockType;
+string JBlock::Type() {
+    return BlkType;
 }

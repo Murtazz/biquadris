@@ -45,6 +45,6 @@ unique_ptr<OBlock> OBlock::blockCpy() {
     return unique_ptr<OBlock> (this->copyBlock());
 }
 
-string OBlock::GetType() {
-    return BlockType;
+string OBlock::Type() {
+    return BlkType;
 }

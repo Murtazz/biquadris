@@ -68,6 +68,6 @@ unique_ptr<ZBlock> ZBlock::blockCpy() {
     return unique_ptr<ZBlock> (this->copyBlock());
 }
 
-string ZBlock::GetType() {
-    return BlockType;
+string ZBlock::Type() {
+    return BlkType;
 }
