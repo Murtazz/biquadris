@@ -16,7 +16,7 @@ void drawPixel(int a, int b, Xwindow& board) {
 void drawInBoard(Xwindow &board) {
     
 
-    std::string s1;
+    string s1;
 
     int bg = 1;
     //Coverpage
@@ -128,10 +128,10 @@ void drawInBoard(Xwindow &board) {
         
         //hint
         string c = "Press anykey to continue! ";
-        board.drawString(225, 530, c, 7);
+        board.drawString(225, 530, c, 0);
         
         if(cin >> s1) break;
     }
     
-    board.fillRectangle(0, 0, 600, 550, bg);
+    board.fillRectangle(0, 0, 600, 550, 5);
 }

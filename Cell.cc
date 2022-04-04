@@ -68,11 +68,11 @@ void Cell::draw(int row, int col, Xwindow *board){
      board->fillRectangle(row * 25, col *25, 25, 25, 2);
    } else if (color == " ") {
      board->fillRectangle(row * 25, col *25, 25, 25, 16);
-   } else if (color == "C") {
-     board->fillRectangle(row * 25, col *25, 25, 25, 10);
-   } else if (color == "X") {
-     board->fillRectangle(row * 25, col *25, 25, 25, 1);
-   }
+   }// else if (color == "C") {
+     //board->fillRectangle(row * 25, col *25, 25, 25, 10);
+   //} else if (color == "X") {
+     //board->fillRectangle(row * 25, col *25, 25, 25, 1);
+   //}
    
     if (blind) {
         board->fillRectangle(row * 25, col *25, 25, 25, 6);

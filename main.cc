@@ -109,12 +109,12 @@ int main(int argc, const char * argv[]) {
     string command;
     
 
-    shared_ptr <Player>& player1 = b.GetPlayer1();
-    shared_ptr <Player>& player2 = b.GetPlayer2();
+    shared_ptr <Player>& player1 = b.Getpler1();
+    shared_ptr <Player>& player2 = b.Getpler2();
     
 
-    b.SetPlayer(player1, "Murtaza", 1, startlevel);
-    b.SetPlayer(player2, "Qianli", 2, startlevel);
+    b.SetPler(player1, "Murtaza", 1, startlevel);
+    b.SetPler(player2, "Qianli", 2, startlevel);
     
 
     player1->CurBlock = player1->levptr->Blockg(player1);
