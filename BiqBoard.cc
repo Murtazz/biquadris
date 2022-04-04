@@ -257,11 +257,11 @@ void BiqBoard::DrawNextBlock(shared_ptr <Player>& pler1, shared_ptr <Player>& pl
             if (!IsText){
                 if (b1[i][j] != " ") {
                     if (b1[i][j] == "I") {
-                        board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 10);
+                        board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 7);
                     } else if (b1[i][j] == "J"){
                         board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 9);
                     } else if (b1[i][j] == "L"){
-                        board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 2);
+                        board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 0);
                     } else if (b1[i][j] == "Z"){
                         board->fillRectangle((3+j)*25, (16+i)*25, 25, 25, 6);
                     } else if (b1[i][j] == "S"){
@@ -280,11 +280,11 @@ void BiqBoard::DrawNextBlock(shared_ptr <Player>& pler1, shared_ptr <Player>& pl
             if (!IsText){
                 if (b2[i][j] != " "){
                     if (b2[i][j] == "I") {
-                        board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 10);
+                        board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 7);
                     } else if (b2[i][j] == "J"){
                         board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 9);
                     } else if (b2[i][j] == "L"){
-                        board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 2);
+                        board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 0);
                     } else if (b2[i][j] == "Z"){
                         board->fillRectangle((16+j)*25, (16+i)*25, 25, 25, 6);
                     } else if (b2[i][j] == "S"){
