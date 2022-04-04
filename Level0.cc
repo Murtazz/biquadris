@@ -21,57 +21,56 @@ Level0::Level0(){
     
     string s;
     while(seq1 >> s){
-        string tb1 = s;
-        seqList1.emplace_back(tb1);
+        string p1 = s;
+        sList1.emplace_back(p1);
     }
     while(seq2 >> s){
-        string tb2 = s;
-        seqList2.emplace_back(tb2);
+        string p2 = s;
+        sList2.emplace_back(p2);
     }
     
-    seqCount1 = 0;
-    seqCount2 = 0;
-    level_num = 0;
-    //
+    seqCt1 = 0;
+    seqCt2 = 0;
+    levnum = 0;
 }
 
 Level0::~Level0(){}
 
 //we pretend we need this function but actually not
-void Level0::addBlockSeq(std::string filename,int id){}
+void Level0::aBS(std::string filename,int id){}
 
 //Return a block pointer
-shared_ptr<Block> Level0::GetBlock(std::shared_ptr<Player> p){
-    shared_ptr<Block> b = nullptr;
-    char s;
+shared_ptr<Block> Level0::Blockg(std::shared_ptr<Player> p){
+    shared_ptr<Block> bp = nullptr;
+    char c;
     if(p->id == 1){
-        if(seqCount1 > seqList1.size() - 1){//reset
-            seqCount1 = 0;
+        if(seqCt1 > sList1.size() - 1){
+            seqCt1 = 0;
         }
         
-        //    cout << "This one is!" << seqList1[seqCount1] << endl;
-        s = seqList1[seqCount1][0];
-        ++seqCount1;
+
+        c = sList1[seqCt1][0];
+        ++seqCt1;
         
     } else {
-        if(seqCount2 > seqList2.size() - 1){//reset
-            seqCount2 = 0;
+        if(seqCt2 > sList2.size() - 1){
+            seqCt2 = 0;
         }
-        s = seqList2[seqCount2][0];
-        ++seqCount2;
+        c = sList2[seqCt2][0];
+        ++seqCt2;
     }
-    switch(s){
-        case 'J' : b = make_shared<JBlock>();break;
-        case 'O' : b = make_shared<OBlock>();break;
-        case 'L' : b = make_shared<LBlock>();break;
-        case 'I' : b = make_shared<IBlock>();break;
-        case 'S' : b = make_shared<SBlock>();break;
-        case 'Z' : b = make_shared<ZBlock>();break;
-        case 'T' : b = make_shared<TBlock>();break;
+    switch(c){
+        case 'J' : bp = make_shared<JBlock>();break;
+        case 'O' : bp = make_shared<OBlock>();break;
+        case 'L' : bp = make_shared<LBlock>();break;
+        case 'I' : bp = make_shared<IBlock>();break;
+        case 'S' : bp = make_shared<SBlock>();break;
+        case 'Z' : bp = make_shared<ZBlock>();break;
+        case 'T' : bp = make_shared<TBlock>();break;
             
     }
-    return b;
+    return bp;
 }
 
 
-void Level0::randomBack(int id ){}
+void Level0::BackRan(int id ){}

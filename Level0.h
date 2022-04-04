@@ -12,17 +12,17 @@ extern bool seedFree;
 
 class Level0 : public Level{
     
-    std::vector<std::string> seqList1;
-    std::vector<std::string> seqList2;
-    int seqCount1;
-    int seqCount2;
+    int seqCt1;
+    int seqCt2;
+    std::vector<std::string> sList1;
+    std::vector<std::string> sList2;
     
 public:
     Level0();
-    std::shared_ptr<Block> GetBlock(std::shared_ptr<Player>  ) override;
+    std::shared_ptr<Block> Blockg(std::shared_ptr<Player>  ) override;
     ~Level0();
-    void addBlockSeq(std::string,int) override;
-    void randomBack(int) override;
+    void aBS(std::string,int) override;
+    void BackRan(int) override;
 };
 
 

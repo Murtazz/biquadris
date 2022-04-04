@@ -14,58 +14,58 @@ extern int seedNum;
 extern bool seedFree;
 
 Level2::Level2(){
-    level_num = 2;
-    int seqCount1_int = 0;
-    int seqCount2_int = 0;
+    levnum = 2;
+    int seqCt1_int = 0;
+    int seqCt2_int = 0;
     srand(seedNum);
     for(int i = 0 ; i < 4 ; i++ ) {
-        seqList1_int.emplace_back(rand() % 7 + 1);
+        numseqLt1.emplace_back(rand() % 7 + 1);
     }//for player1
     for(int i = 0 ; i < 4 ; i++ ) {
-        seqList2_int.emplace_back(rand() % 7 + 1);
+        numseqLt2.emplace_back(rand() % 7 + 1);
     }//for player2
 }
 
 //we pretend we need this function but actually not
-void Level2::addBlockSeq(std::string filename,int id){}
+void Level2::aBS(std::string filename,int id){}
 
 Level2::~Level2(){};
 
-shared_ptr<Block> Level2::GetBlock(std::shared_ptr<Player> p){
-    shared_ptr<Block> b = nullptr;
-    int rdmb = 1;
+shared_ptr<Block> Level2::Blockg(std::shared_ptr<Player> pler){
+    shared_ptr<Block> bp = nullptr;
+    int rm = 1;
     //
-    if(p->id == 1){
-        if(seqCount1_int > seqList1_int.size() - 1){//reset
-            seqCount1_int = 0;
+    if(pler->id == 1){
+        if(seqCt1_int > numseqLt1.size() - 1){//reset
+            seqCt1_int = 0;
         }
-        rdmb = seqList1_int[seqCount1_int];
-        ++seqCount1_int;
+        rm = numseqLt1[seqCt1_int];
+        ++seqCt1_int;
         
     } else {
-        if(seqCount2_int > seqList2_int.size() - 1){//reset
-            seqCount2_int = 0;
+        if(seqCt2_int > numseqLt2.size() - 1){//reset
+            seqCt2_int = 0;
         }
-        rdmb = seqList2_int[seqCount2_int];
-        ++seqCount2_int;
+        rm = numseqLt2[seqCt2_int];
+        ++seqCt2_int;
     }
     //
     if (seedFree){
         random_device rd;
         mt19937 eng(rd());
         uniform_int_distribution<> distr(1,7);
-        rdmb = distr(eng);
+        rm = distr(eng);
     }
-    switch (rdmb){
-        case 1: b = make_shared<LBlock>(); break;
-        case 2: b = make_shared<IBlock>(); break;
-        case 3: b = make_shared<OBlock>(); break;
-        case 4: b = make_shared<JBlock>(); break;
-        case 5: b = make_shared<TBlock>(); break;
-        case 6: b = make_shared<ZBlock>(); break;
-        case 7: b = make_shared<SBlock>(); break;
+    switch (rm){
+        case 1: bp = make_shared<LBlock>(); break;
+        case 2: bp = make_shared<IBlock>(); break;
+        case 3: bp = make_shared<OBlock>(); break;
+        case 4: bp = make_shared<JBlock>(); break;
+        case 5: bp = make_shared<TBlock>(); break;
+        case 6: bp = make_shared<ZBlock>(); break;
+        case 7: bp = make_shared<SBlock>(); break;
     }
-    return b;
+    return bp;
 }
 
-void Level2::randomBack(int id ){}
+void Level2::BackRan(int id ){}

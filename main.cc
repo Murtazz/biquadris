@@ -117,12 +117,12 @@ int main(int argc, const char * argv[]) {
     b.SetPlayer(player2, "Qianli", 2, startlevel);
     
 
-    player1->CurBlock = player1->levptr->GetBlock(player1);
-    player1->NextBlock = player1->levptr->GetBlock(player1);
+    player1->CurBlock = player1->levptr->Blockg(player1);
+    player1->NextBlock = player1->levptr->Blockg(player1);
     
     
-    player2->CurBlock = player2->levptr->GetBlock(player2);
-    player2->NextBlock = player2->levptr->GetBlock(player2);
+    player2->CurBlock = player2->levptr->Blockg(player2);
+    player2->NextBlock = player2->levptr->Blockg(player2);
     
     
     b.DrawBlock(player1, player1->row, player1->col);
@@ -183,10 +183,10 @@ int main(int argc, const char * argv[]) {
                 cin >> cont;
                 if (cont == "y") {
                     b.Restart(b.NowPlayer(), b.OtherPlayer());
-                    b.NowPlayer()->CurBlock = b.NowPlayer()->levptr->GetBlock(player1);
-                    b.NowPlayer()->NextBlock = b.NowPlayer()->levptr->GetBlock(player1);
-                    b.OtherPlayer()->CurBlock = b.OtherPlayer()->levptr->GetBlock(player2);
-                    b.OtherPlayer()->NextBlock = b.OtherPlayer()->levptr->GetBlock(player2);
+                    b.NowPlayer()->CurBlock = b.NowPlayer()->levptr->Blockg(player1);
+                    b.NowPlayer()->NextBlock = b.NowPlayer()->levptr->Blockg(player1);
+                    b.OtherPlayer()->CurBlock = b.OtherPlayer()->levptr->Blockg(player2);
+                    b.OtherPlayer()->NextBlock = b.OtherPlayer()->levptr->Blockg(player2);
                     cmd = " ";
                 } else {
                     break;
@@ -198,10 +198,10 @@ int main(int argc, const char * argv[]) {
                 cin >> cont;
                 if (cont == "y") {
                     b.Restart(b.NowPlayer(), b.OtherPlayer());
-                    b.NowPlayer()->CurBlock = b.NowPlayer()->levptr->GetBlock(player1);
-                    b.NowPlayer()->NextBlock = b.NowPlayer()->levptr->GetBlock(player1);
-                    b.OtherPlayer()->CurBlock = b.OtherPlayer()->levptr->GetBlock(player2);
-                    b.OtherPlayer()->NextBlock = b.OtherPlayer()->levptr->GetBlock(player2);
+                    b.NowPlayer()->CurBlock = b.NowPlayer()->levptr->Blockg(player1);
+                    b.NowPlayer()->NextBlock = b.NowPlayer()->levptr->Blockg(player1);
+                    b.OtherPlayer()->CurBlock = b.OtherPlayer()->levptr->Blockg(player2);
+                    b.OtherPlayer()->NextBlock = b.OtherPlayer()->levptr->Blockg(player2);
  	            cmd = " ";
                 } else {
                     break;
@@ -294,14 +294,14 @@ int main(int argc, const char * argv[]) {
                         }
                     }
                     if (cmd.length() > 5) {
-                        if (cmd[5] == 'u') {//levelup
+                        if (cmd[5] == 'u') {
                             if(num < 0) num = 1;
                                 while(num != 0){
                                 b.LevelUp(b.NowPlayer());
                                 num--;
                             }
                         }
-                        if (cmd[5] == 'd') {//leveldown
+                        if (cmd[5] == 'd') {
                             if(num < 0) num = 1;
                             while(num != 0) {
                                 b.LevelDown(b.NowPlayer());
@@ -321,7 +321,7 @@ int main(int argc, const char * argv[]) {
                         cout << "only level 3 and level 4 can norandom!!" << endl;
                     } else {//yes now we do this
                         cout << "we will find" << norstring << " for testing!" <<endl;
-                        b.NowPlayer()->levptr->addBlockSeq(norstring,b.NowPlayer()->id);
+                        b.NowPlayer()->levptr->aBS(norstring,b.NowPlayer()->id);
                     }
                 }
             }
@@ -341,15 +341,15 @@ int main(int argc, const char * argv[]) {
                         if((b.NowPlayer()->level == 0)||(b.NowPlayer()->level == 1)||(b.NowPlayer()->level == 2)){
                             cout << "only level 3 and level 4 can random back!!" << endl;
                         } else {
-                            b.NowPlayer()->levptr->randomBack(b.NowPlayer()->id);
+                            b.NowPlayer()->levptr->BackRan(b.NowPlayer()->id);
                         }
                     }
                     if (cmd[1] == 'e') {
                         b.Restart(b.NowPlayer(), b.OtherPlayer());
-                        b.NowPlayer()->CurBlock = b.NowPlayer()->levptr->GetBlock(player1);
-                        b.NowPlayer()->NextBlock = b.NowPlayer()->levptr->GetBlock(player1);
-                        b.OtherPlayer()->CurBlock = b.OtherPlayer()->levptr->GetBlock(player2);
-                        b.OtherPlayer()->NextBlock = b.OtherPlayer()->levptr->GetBlock(player2);
+                        b.NowPlayer()->CurBlock = b.NowPlayer()->levptr->Blockg(player1);
+                        b.NowPlayer()->NextBlock = b.NowPlayer()->levptr->Blockg(player1);
+                        b.OtherPlayer()->CurBlock = b.OtherPlayer()->levptr->Blockg(player2);
+                        b.OtherPlayer()->NextBlock = b.OtherPlayer()->levptr->Blockg(player2);
                         cout << "we can restart" << endl;
                     }
                     if (cmd[1] == 'i') {
@@ -399,7 +399,7 @@ int main(int argc, const char * argv[]) {
         
         
             if (b.DrawBlock(b.NowPlayer(), b.NowPlayer()->row, b.NowPlayer()->col)) {
-                b.NowPlayer()->NextBlock  = b.NowPlayer()->levptr->GetBlock(b.NowPlayer());
+                b.NowPlayer()->NextBlock  = b.NowPlayer()->levptr->Blockg(b.NowPlayer());
                 int clear_rows = b.ReCalc(b.NowPlayer());
                 if (clear_rows >= 2) {
                     string cmd2;

@@ -18,7 +18,6 @@ class Cell {
   public:
   Cell();  // Default constructor
   ~Cell(); // Destructor
-  
     void TurnOn(std::string new_color);
     void TurnOff(std::string new_color);
     void TurnBlind();
