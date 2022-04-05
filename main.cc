@@ -22,7 +22,6 @@ string seqName2 = "biquadris_sequence2.txt";
 string norstring;
 string seqstring;
 int seedn = 111;
-bool seedt = false;
 bool specialOn = false;
 
 
@@ -79,9 +78,6 @@ int main(int argc, const char * argv[]) {
                             } else {
                                 seedn = stoi(argv[i]);
                             }
-                        } else if(strncmp(argv[i],"-seedfree",5)) {
-                            i++;
-                            seedt = true;
                         }
                     }
                 }

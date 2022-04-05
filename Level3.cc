@@ -11,7 +11,6 @@ using namespace std;
 extern string seqName1;
 extern string seqName2;
 extern int seedn;
-extern bool seedt;
 
 Level3::Level3(){
     levnum = 3;
@@ -74,13 +73,6 @@ shared_ptr<Block> Level3::Blockg(std::shared_ptr<Player> pler){
             rm = numseqLt2[seqCt2_int];
             ++seqCt2_int;
         }
-        //
-        if (seedt){
-            random_device rd;
-            mt19937 eng(rd());
-            uniform_int_distribution<> distr(1,9);
-            rm = distr(eng);
-        }
         switch (rm){
             case 1: bp = make_shared<LBlock>(); break;
             case 2: bp = make_shared<IBlock>(); break;
@@ -92,7 +84,7 @@ shared_ptr<Block> Level3::Blockg(std::shared_ptr<Player> pler){
             case 8: bp = make_shared<ZBlock>(); break;
             case 9: bp = make_shared<ZBlock>(); break;
         }
-    }else{
+    } else {
         
         //use weird file to get block
         char c;

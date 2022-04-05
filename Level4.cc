@@ -12,7 +12,6 @@ using namespace std;
 extern string seqName1;
 extern string seqName2;
 extern int seedn;
-extern bool seedt;
 
 Level4::Level4(){
     levnum = 4;
@@ -65,7 +64,6 @@ shared_ptr<Block> Level4::Blockg(std::shared_ptr<Player> pler){
     if ((pler->id == 2) && rb2) random = true;
     if(random){
         int rm;
-        //
         if(pler->id == 1){
             if(seqCt1_int > numseqLt1.size() - 1){//reset
                 seqCt1_int = 0;
@@ -80,13 +78,6 @@ shared_ptr<Block> Level4::Blockg(std::shared_ptr<Player> pler){
             rm = numseqLt2[seqCt2_int];
             ++seqCt2_int;
         }
-        //
-        if (seedt){
-            random_device rd;
-            mt19937 eng(rd());
-            uniform_int_distribution<> distr(1,9);
-            rm = distr(eng);
-        }
         switch (rm){
             case 1: bp = make_shared<LBlock>(); break;
             case 2: bp = make_shared<IBlock>(); break;
@@ -100,7 +91,6 @@ shared_ptr<Block> Level4::Blockg(std::shared_ptr<Player> pler){
                 
         }
     }else{
-        
         char c;
         if(pler->id == 1){
             if(seqCt1 > sList1.size() - 1){//reset

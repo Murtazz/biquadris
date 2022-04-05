@@ -11,7 +11,6 @@ using namespace std;
 extern string seqName1;
 extern string seqName2;
 extern int seedn;
-extern bool seedt;
 
 Level2::Level2(){
     levnum = 2;
@@ -48,13 +47,6 @@ shared_ptr<Block> Level2::Blockg(std::shared_ptr<Player> pler){
         }
         rm = numseqLt2[seqCt2_int];
         ++seqCt2_int;
-    }
-    //
-    if (seedt){
-        random_device rd;
-        mt19937 eng(rd());
-        uniform_int_distribution<> distr(1,7);
-        rm = distr(eng);
     }
     switch (rm){
         case 1: bp = make_shared<LBlock>(); break;

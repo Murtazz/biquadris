@@ -7,7 +7,6 @@ struct Player;
 extern std::string seqName1;
 extern std::string seqName2;
 extern int seedn;
-extern bool seedt;
 
 class Level2 : public Level{
     
