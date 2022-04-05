@@ -123,7 +123,6 @@ void BiqBoard::DrawBoard(shared_ptr <Player>& pler1, shared_ptr <Player>& pler2,
     int temp_col = 0;
     cout << "Level:    " << pler1->curLev << "     " << "Level:    " << pler2->curLev << endl;
     cout << "Score:    " << pler1->Score << "     " << "Score:    " << pler2->Score << endl;
-    cout << "High :    " << pler1->High << "     " << "High :    " << pler2->High << endl;
     if (!IsText){
         board->fillRectangle(0, 0, 600, 30, 5);
         board->drawString(5, 25, "Level:");
@@ -134,10 +133,6 @@ void BiqBoard::DrawBoard(shared_ptr <Player>& pler1, shared_ptr <Player>& pler2,
         string scoreStr1 = NumToString(pler1->Score);
         board->drawString(150, 25, scoreStr1);
         
-        board->drawString(200, 25, "High:");
-        string highStr1 = NumToString(pler1->High);
-        board->drawString(250, 25, highStr1);
-        
         board->drawString(330, 25, "Level:");
         string levelStr2 = NumToString(pler2->curLev);
         board->drawString(380, 25, levelStr2);
@@ -145,10 +140,6 @@ void BiqBoard::DrawBoard(shared_ptr <Player>& pler1, shared_ptr <Player>& pler2,
         board->drawString(425, 25, "Score:");
         string scoreStr2 = NumToString(pler2->Score);
         board->drawString(475, 25, scoreStr2);
-        
-        board->drawString(525, 25, "High:");
-        string highStr2 = NumToString(pler2->High);
-        board->drawString(575, 25, highStr2);
     }
     
     cout << "-----------     -----------" << endl;
