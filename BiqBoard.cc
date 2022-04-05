@@ -208,11 +208,11 @@ bool BiqBoard::DrawBlock(shared_ptr <Player>& pler, int x, int y) {
             }
             else {
                 if (pler->downImposs == 1) {
-                    pler->Field[new_row][new_col].TurnOff(color);
+                    pler->Field[new_row][new_col].Deactivate(color);
                     continue;
                 }
                 if (ava){
-                    pler->Field[new_row][new_col].TurnOn(color);
+                    pler->Field[new_row][new_col].Activate(color);
                 }
             }
         }
@@ -744,7 +744,7 @@ void BiqBoard::deadCell(shared_ptr <Player>& pler) {
         for (int col = 0; col < 11; ++col){
             Cell cur = pler->Field[row][col];
             if (cur.isActive()){
-                pler->Field[row][col].TurnOff(" ");
+                pler->Field[row][col].Deactivate(" ");
             }
         }
     }

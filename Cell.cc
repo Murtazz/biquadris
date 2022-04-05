@@ -7,12 +7,12 @@ Cell::Cell(): Active(false), blind(false), color(" "), window(nullptr), x(0), y(
 
 Cell::~Cell() {}
 
-void Cell::TurnOn(string new_color) {
+void Cell::Activate(string new_color) {
     Active = true;
     color = new_color;
 }
 
-void Cell::TurnOff(string new_color) {
+void Cell::Deactivate(string new_color) {
     Active = false;
     color = new_color;
 }
