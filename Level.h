@@ -14,6 +14,7 @@
 #include "SBlock.h"
 #include "ZBlock.h"
 #include "TBlock.h"
+#include "starBlock.h"
 
 
 struct Player;

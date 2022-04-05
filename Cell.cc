@@ -53,7 +53,7 @@ void Cell::draw(int row, int col, Xwindow *board){
    if (color == "I") {
      board->fillRectangle(row * 25, col *25, 25, 25, 7);
    } else if (color == "J"){
-     board->fillRectangle(row * 25, col *25, 25, 25, 9);
+     board->fillRectangle(row * 25, col *25, 25, 25, 2);
    } else if (color == "L"){
      board->fillRectangle(row * 25, col *25, 25, 25, 0);
    } else if (color == "Z"){
@@ -66,6 +66,8 @@ void Cell::draw(int row, int col, Xwindow *board){
      board->fillRectangle(row * 25, col *25, 25, 25, 8);
    } else if (color == " ") {
      board->fillRectangle(row * 25, col *25, 25, 25, 1);
+   }else if (color == "*"){
+     board->fillRectangle(row * 25, col *25, 25, 25, 9);
    }
 
     if (blind) {

@@ -48,11 +48,6 @@ Xwindow::Xwindow(int width, int height): width{width}, height{height} {
 
 	XSynchronize(d, True);
 
-	XSelectInput(d, w, ExposureMask);
-	XFlush(d);
-	XEvent event;
-	XNextEvent(d, &event); // Hang until the window is ready.
-	XSelectInput(d, w, 0);
 
 }
 
@@ -92,6 +87,7 @@ void Xwindow::drawLine(int x1, int y1, int x2, int y2) {
     XDrawLine(d, w, gc, x1, y1, x2, y2);
 }
 
+/*
 void Xwindow::drawArc(int x1, int y1, int width, int height, int sAngle, int eAngle) {
     XDrawArc(d, w, gc, x1, y1, width/2, height/2, sAngle * 64, eAngle * 64);
 }
@@ -102,13 +98,16 @@ void Xwindow::fillArc(int x, int y, int width, int height, int angle1, int angle
 	XSetForeground(d, gc, colours[Black]);
 }
 
+
 void Xwindow::fillCircle(int x, int y, int di, int colour) {
     fillArc(x, y, di, di, 0, 360, colour);
 }
+*/
+
 
 void Xwindow::drawString(int x, int y, string msg, int colour) {
 	XFontStruct * f = XLoadQueryFont(d, "6x13");	
-	printMessage(x, y, msg, colour, *f); 
+	printmsage(x, y, msg, colour, *f); 
 
 	delete f;
 }
@@ -121,7 +120,7 @@ void Xwindow::drawStringFont(int x, int y, string msg, string font, int colour) 
 		f = XLoadQueryFont(d, "6x13");
 	}
 
-	printMessage(x, y, msg, colour, *f);
+	printmsage(x, y, msg, colour, *f);
 	delete f;
 }
 
@@ -133,7 +132,8 @@ void Xwindow::drawBigString(int x, int y, string msg, int colour) {
 	drawStringFont(x, y, msg, name.str(), colour);
 }
 
-void Xwindow::printMessage(int x, int y, const string& msg, int colour, XFontStruct& f){
+
+void Xwindow::printmsage(int x, int y, const string& msg, int colour, XFontStruct& f){
   XSetForeground(d, gc, colours[colour]);
   XTextItem ti;
   ti.chars = const_cast<char*>(msg.c_str());

@@ -44,17 +44,19 @@ class Xwindow {
 
 	// Draws an arc centered at (x, y) with height and width starting from angle1 to angle2
 	//   angle1 being 0 is (x + width, y) and measured in degrees
+	/*
 	void drawArc(int x, int y, int width, int height, int angle1, int angle2);
 
-	void fillArc(int x, int y, int width, int height, int angle1, int angle2,
-			int colour);
+	void fillArc(int x, int y, int width, int height, int angle1, int angle2, int colour);
+
+	*/
 	// Draws a circle centered at (x, y) with diameter d
 	void fillCircle(int x, int y, int d, int colour = Black);
 
-  void showAvailableFonts();
-
- private:
-  void printMessage(int x, int y, const std::string& msg, int colour, XFontStruct& f);
+	void showAvailableFonts();
+	
+	void printmsage(int x, int y, const std::string& msg, int colour, XFontStruct& f);
 };
+
 
 #endif
