@@ -66,13 +66,13 @@ void BiqBoard::SetPler(shared_ptr <Player> &pler, string playername,int id,int c
     pler->SpeAttack = 0; 
     pler->downImposs = 0;
 
-    pler->IBlock = 0;
-    pler->JBlock = 0;
-    pler->LBlock = 0;
-    pler->OBlock = 0;
-    pler->SBlock = 0;
-    pler->TBlock = 0;
-    pler->ZBlock = 0;
+    pler->IScore = 0;
+    pler->JScore = 0;
+    pler->LScore = 0;
+    pler->OScore = 0;
+    pler->SScore = 0;
+    pler->TScore = 0;
+    pler->ZScore = 0;
 }
 
 
@@ -432,9 +432,9 @@ void BiqBoard::down(shared_ptr <Player>& pler){
 //drop
 void BiqBoard::drop(shared_ptr <Player>& pler) {
     while (pler->downImposs == 0) {
-        updateScore(pler);
+        updatePoss(pler);
         down(pler);
-        updateScore(pler);
+        updatePoss(pler);
     }
 }
 
@@ -537,7 +537,7 @@ void BiqBoard::initialPossibilities () {
 
 
 // update all possible
-void BiqBoard::updateScore(shared_ptr <Player>& pler){
+void BiqBoard::updatePoss(shared_ptr <Player>& pler){
     int x = pler->row;
     int y = pler->col;
     int b_row = 5;
@@ -598,19 +598,19 @@ int BiqBoard::ReCalc(shared_ptr <Player>& pler) {
         for (int j = 0; j < 11; ++j) {
             string color = pler->Field[clean_row[i]][j].GetColor();
             if (color == "I") {
-                pler->IBlock += 1;
+                pler->IScore += 1;
             } else if (color == "J") {
-                pler->JBlock += 1;
+                pler->JScore += 1;
             } else if (color == "L") {
-                pler->LBlock += 1;
+                pler->LScore += 1;
             } else if (color == "O") {
-                pler->OBlock += 1;
+                pler->OScore += 1;
             } else if (color == "S") {
-                pler->SBlock += 1;
+                pler->SScore += 1;
             } else if (color == "T") {
-                pler->TBlock += 1;
+                pler->TScore += 1;
             } else if (color == "Z") {
-                pler->ZBlock += 1;
+                pler->ZScore += 1;
             }
         }
     }
@@ -661,32 +661,32 @@ void BiqBoard::destroyLine(shared_ptr <Player>& pler,  vector< int > & clean_row
     int add_score = (num_clean_row + pler->curLev)*(num_clean_row + pler->curLev);
     //cout << add_score << endl;
     
-    if ((pler->IBlock != 0)&&(pler->IBlock % 4 == 0)) {
+    if ((pler->IScore != 0)&&(pler->IScore % 4 == 0)) {
         add_score += 1;
     }
-    if ((pler->JBlock != 0)&&(pler->JBlock % 4 == 0)) {
+    if ((pler->JScore != 0)&&(pler->JScore % 4 == 0)) {
         add_score += 1;
     }
-    if ((pler->LBlock != 0)&&(pler->LBlock % 4 == 0)) {
+    if ((pler->LScore != 0)&&(pler->LScore % 4 == 0)) {
         add_score += 1;
     }
-    if ((pler->OBlock != 0)&&(pler->OBlock % 4 == 0)) {
+    if ((pler->OScore != 0)&&(pler->OScore % 4 == 0)) {
         add_score += 1;
     }
-    if ((pler->SBlock != 0)&&(pler->SBlock % 4 == 0)) {
+    if ((pler->SScore != 0)&&(pler->SScore % 4 == 0)) {
         add_score += 1;
     }
-    if ((pler->TBlock != 0)&&(pler->TBlock % 4 == 0)) {
+    if ((pler->TScore != 0)&&(pler->TScore % 4 == 0)) {
         add_score += 1;
     }
     
     cout << add_score << endl;
-    pler->IBlock = 0;
-    pler->JBlock = 0;
-    pler->LBlock = 0;
-    pler->OBlock = 0;
-    pler->SBlock = 0;
-    pler->TBlock = 0;
+    pler->IScore = 0;
+    pler->JScore = 0;
+    pler->LScore = 0;
+    pler->OScore = 0;
+    pler->SScore = 0;
+    pler->TScore = 0;
     
     pler->Field = new_Field;
     pler->Sco += add_score;
@@ -756,18 +756,18 @@ void BiqBoard::deadCell(shared_ptr <Player>& pler) {
 // Heavy
 void BiqBoard::LevelHeavy(shared_ptr <Player>& pler) {
     if ((pler->downImposs == 0)&&(pler->curLev >= 3)) {
-        updateScore(pler);
+        updatePoss(pler);
         down(pler);
-        updateScore(pler);
+        updatePoss(pler);
     }
 }
 
 void BiqBoard::BlockHeavy(shared_ptr <Player>& pler) {
     for (int i = 0; i < 2; ++i) {
         if ((pler->downImposs == 0)&&(pler->heavy)) {
-            updateScore(pler);
+            updatePoss(pler);
             down(pler);
-            updateScore(pler);
+            updatePoss(pler);
         }
     }
 }

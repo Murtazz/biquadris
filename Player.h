@@ -38,13 +38,13 @@ struct Player{
     int SpeAttack;
 
     // keeping track of score
-    int IBlock;
-    int JBlock;
-    int LBlock;
-    int OBlock;
-    int SBlock;
-    int TBlock;
-    int ZBlock;
+    int IScore;
+    int JScore;
+    int LScore;
+    int OScore;
+    int SScore;
+    int TScore;
+    int ZScore;
     
     // keep track for Heavy
     bool heavy;

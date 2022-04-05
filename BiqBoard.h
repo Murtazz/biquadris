@@ -40,7 +40,7 @@ public:
     void clockPossible(std::shared_ptr <Player>& pler);
     void counterCPossible(std::shared_ptr <Player>& pler);
     void initialPossibilities();
-    void updateScore(std::shared_ptr <Player>& pler);
+    void updatePoss(std::shared_ptr <Player>& pler);
     int ReCalc(std::shared_ptr <Player>& pler) override;
     void destroyLine(std::shared_ptr <Player>& pler, std::vector<int> &clean_row);
     void LevelUp(std::shared_ptr <Player>& pler);

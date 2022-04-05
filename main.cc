@@ -207,7 +207,7 @@ int main(int argc, const char * argv[]) {
                                 b.NowPlayer()->CurBlock->cclockw();
                             }
                             b.initialPossibilities();
-                            b.updateScore(b.NowPlayer());
+                            b.updatePoss(b.NowPlayer());
                         
                         }
                     }
@@ -218,7 +218,7 @@ int main(int argc, const char * argv[]) {
                                 b.NowPlayer()->CurBlock->clockw();
                             }
                             b.initialPossibilities();
-                            b.updateScore(b.NowPlayer());
+                            b.updatePoss(b.NowPlayer());
                         }
                     }
                     // we also have cw for clockwise and ccw for counterclockwise
@@ -229,7 +229,7 @@ int main(int argc, const char * argv[]) {
                                 b.NowPlayer()->CurBlock->cclockw();
                             }
                             b.initialPossibilities();
-                            b.updateScore(b.NowPlayer());
+                            b.updatePoss(b.NowPlayer());
                         }
                     }
                     if (cmd[1] == 'w') { // cw
@@ -239,7 +239,7 @@ int main(int argc, const char * argv[]) {
                                 b.NowPlayer()->CurBlock->clockw();
                             }
                             b.initialPossibilities();
-                            b.updateScore(b.NowPlayer());
+                            b.updatePoss(b.NowPlayer());
                         }
                     }
                 }
@@ -252,9 +252,9 @@ int main(int argc, const char * argv[]) {
                     if(cmd[1] == 'o'){//down
                         if (num < 0) num = 1;
                         for(;num > 0;num--) {
-                            b.updateScore(b.NowPlayer());
+                            b.updatePoss(b.NowPlayer());
                             b.down(b.NowPlayer());
-                            b.updateScore(b.NowPlayer());
+                            b.updatePoss(b.NowPlayer());
                         }
                     }
                     if (cmd[1] == 'r') {//drop
@@ -270,7 +270,7 @@ int main(int argc, const char * argv[]) {
                         if(num < 0) num = 1;
                             while(num != 0) {
                             b.left(b.NowPlayer());
-                            b.updateScore(b.NowPlayer());
+                            b.updatePoss(b.NowPlayer());
                             b.LevelHeavy(b.NowPlayer());
                             b.BlockHeavy(b.NowPlayer());
                             num--;
@@ -340,7 +340,7 @@ int main(int argc, const char * argv[]) {
                         if (num < 0) num = 1;
                         while(num != 0) {
                             b.right(b.NowPlayer());
-                            b.updateScore(b.NowPlayer());
+                            b.updatePoss(b.NowPlayer());
                         
                             b.LevelHeavy(b.NowPlayer());
                             b.BlockHeavy(b.NowPlayer());
@@ -434,7 +434,7 @@ int main(int argc, const char * argv[]) {
                 
                 b.drop(b.NowPlayer());
                 
-                b.updateScore(b.NowPlayer());
+                b.updatePoss(b.NowPlayer());
                 
                 b.ReCalc(b.NowPlayer());
                 b.DrawBlock(b.NowPlayer(), b.NowPlayer()->row, b.NowPlayer()->col);
