@@ -4,7 +4,7 @@
 #include "Cell.h"
 #include "Player.h"
 #include "Level.h"
-
+#include "starBlock.h"
 #include <cmath>
 #include <cstdlib>
 #include <time.h>
@@ -422,7 +422,30 @@ int main(int argc, const char * argv[]) {
                     }
                 }
                 b.switchPlayer();
-            }//end  of punishment
+            }
+            //we set the punish
+        if (b.NowPlayer()->starblk){  // * punishment
+            if(b.NowPlayer()->notclear == 5){
+                shared_ptr<Block> startemp = b.NowPlayer()->CurBlock;
+                b.NowPlayer()->CurBlock = make_shared<starBlock>();
+                
+                b.right(b.NowPlayer());
+                b.right(b.NowPlayer());
+                
+                b.drop(b.NowPlayer());
+                
+                b.update(b.NowPlayer());
+                
+                b.ReCalc(b.NowPlayer());
+                b.DrawBlock(b.NowPlayer(), b.NowPlayer()->row, b.NowPlayer()->col);
+                b.DrawBoard(player1, player2, &board);
+                
+                
+                b.NowPlayer()->CurBlock = startemp;//
+                b.NowPlayer()->notclear = 0;//we reset
+            }
+        }//end of *
+
             b.ReCalc(b.NowPlayer());
             b.DrawBlock(b.NowPlayer(), b.NowPlayer()->row, b.NowPlayer()->col);
             b.DrawBoard(player1, player2, &board);
