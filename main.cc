@@ -386,7 +386,7 @@ int main(int argc, const char * argv[]) {
                 int clear_rows = b.ReCalc(b.NowPlayer());
                 if (clear_rows >= 2) {
                     string cmd2;
-                    cout << "Which Punishment you want to choice: blind || heavy || force";
+                    cout << "Which Punishment you want to choose: blind || heavy || force";
                 
                     cout << endl;
                     while (cin >> cmd2) {
