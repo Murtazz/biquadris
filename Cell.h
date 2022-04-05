@@ -6,7 +6,7 @@
 
 
 class Cell {
-  bool isAlive;
+  bool Active;
   bool blind;
   std::string color;
   Xwindow *window;
@@ -18,19 +18,17 @@ class Cell {
   public:
   Cell();  // Default constructor
   ~Cell(); // Destructor
-    void TurnOn(std::string new_color);
-    void TurnOff(std::string new_color);
-    void TurnBlind();
-    void NotBlind();
-    std::string GetColor ();
+  void TurnOn(std::string new_color);
+  void TurnOff(std::string new_color);
+  void TurnBlind();
+  void NotBlind();
+  std::string GetColor ();
     
-    bool IsAlive();
+  bool isActive();
 
   void draw(int row, int col, Xwindow * board); 
 
   friend std::ostream& operator<<(std::ostream &out, const Cell &c);
- 
-
 };
 
 

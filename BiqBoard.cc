@@ -18,7 +18,7 @@ BiqBoard::~BiqBoard(){
 
 
 // ********************** initialization **********************
-void BiqBoard::SetPler(shared_ptr <Player> &pler, string playername,int id,int level) {
+void BiqBoard::SetPler(shared_ptr <Player> &pler, string playername,int id,int curLev) {
     
     pler->PlayField.resize(15);
     for (int row = 0; row < 15; row++) {
@@ -27,16 +27,16 @@ void BiqBoard::SetPler(shared_ptr <Player> &pler, string playername,int id,int l
             pler->PlayField[row][col] = Cell();
         }
     }
-    //for level
-    if (level == 0) {
+    //for curLev
+    if (curLev == 0) {
         pler->levptr = unique_ptr <Level> (new Level0);
-    } else if (level == 1) {
+    } else if (curLev == 1) {
         pler->levptr = unique_ptr <Level> (new Level1);
-    } else if (level == 2) {
+    } else if (curLev == 2) {
         pler->levptr= unique_ptr <Level> (new Level2);
-    } else if (level == 3) {
+    } else if (curLev == 3) {
         pler->levptr= unique_ptr <Level> (new Level3);
-    } else if (level == 4) {
+    } else if (curLev == 4) {
         pler->levptr= unique_ptr <Level> (new Level4);
     } 
     
@@ -47,15 +47,15 @@ void BiqBoard::SetPler(shared_ptr <Player> &pler, string playername,int id,int l
     pler->NextBlock = nullptr;
     pler->name = playername;
     pler->Score = 0;
-    pler->level = level;
-    pler->IsAlive = true;
+    pler->curLev = curLev;
+    pler->Active = true;
     pler->SpeAttack = 0;
     pler->col = 0;
     pler->row = 0;
-    pler->cant_down = 0;
-    pler->LeftPossible = true;
-    pler->RightPossible = true;
-    pler->DownPossible = true;
+    pler->downImposs = 0;
+    pler->LPoss = true;
+    pler->RPoss = true;
+    pler->DPoss = true;
     pler->clockPossible = true;
     pler->counterCPossible = true;
     
@@ -71,7 +71,7 @@ void BiqBoard::SetPler(shared_ptr <Player> &pler, string playername,int id,int l
     pler->heavy = false;
 }
 
-// ********************** Get Private Field from board ********************** (it could be delete, no use)
+// get players
 shared_ptr <Player>& BiqBoard::Getpler1() {
     return pler1;
     
@@ -85,7 +85,7 @@ shared_ptr <Player>& BiqBoard::Getpler2() {
 
 
 
-// ********************** Get Private Field from pler **********************
+// get score
 int BiqBoard::gCS(shared_ptr <Player>& pler) {
     return pler->Score;
 }
@@ -118,17 +118,16 @@ string NumToString(int num) {
     return s;
 }
 
-// ********************** Draw the whole Board **********************
-// I add a Xwindow pointer here!!!
+// Making the board
 void BiqBoard::DrawBoard(shared_ptr <Player>& pler1, shared_ptr <Player>& pler2, Xwindow * board) {
     int temp_col = 0;
-    cout << "Level:    " << pler1->level << "     " << "Level:    " << pler2->level << endl;
+    cout << "Level:    " << pler1->curLev << "     " << "Level:    " << pler2->curLev << endl;
     cout << "Score:    " << pler1->Score << "     " << "Score:    " << pler2->Score << endl;
     cout << "High :    " << pler1->High << "     " << "High :    " << pler2->High << endl;
     if (!IsText){
         board->fillRectangle(0, 0, 600, 30, 5);
         board->drawString(5, 25, "Level:", 7);
-        string levelStr1 = NumToString(pler1->level);
+        string levelStr1 = NumToString(pler1->curLev);
         board->drawString(55, 25, levelStr1, 7);
         
         board->drawString(100, 25, "Score:", 7);
@@ -140,7 +139,7 @@ void BiqBoard::DrawBoard(shared_ptr <Player>& pler1, shared_ptr <Player>& pler2,
         board->drawString(250, 25, highStr1, 7);
         
         board->drawString(330, 25, "Level:", 7);
-        string levelStr2 = NumToString(pler2->level);
+        string levelStr2 = NumToString(pler2->curLev);
         board->drawString(380, 25, levelStr2, 7);
         
         board->drawString(425, 25, "Score:", 7);
@@ -189,7 +188,7 @@ void BiqBoard::DrawBoard(shared_ptr <Player>& pler1, shared_ptr <Player>& pler2,
     if (!IsText) {
         for (int i = 18; i < 30; ++i) {
             for (int j = 0; j < 24; ++j) {
-                board->fillRectangle(j*25, i*25, 25, 25, 16);
+                board->fillRectangle(j*25, i*25, 25, 25, 1);
             }
         }
     }
@@ -217,7 +216,7 @@ bool BiqBoard::DrawBlock(shared_ptr <Player>& pler, int x, int y) {
                 continue;
             }
             else {
-                if (pler->cant_down == 1) {
+                if (pler->downImposs == 1) {
                     pler->PlayField[new_row][new_col].TurnOff(color);
                     continue;
                 }
@@ -227,15 +226,15 @@ bool BiqBoard::DrawBlock(shared_ptr <Player>& pler, int x, int y) {
             }
         }
     }
-    // return a bool to tell to change the block
-    if (pler->cant_down == 1) {
-        pler->cant_down = 0;
+
+    if (pler->downImposs == 1) {
+        pler->downImposs = 0;
         pler->col = 0;
         pler->row = 0;
         pler->CurBlock = pler->NextBlock;
-        pler->RightPossible = true;
-        pler->LeftPossible = true;
-        pler->DownPossible = true;
+        pler->RPoss = true;
+        pler->LPoss = true;
+        pler->DPoss = true;
         pler->clockPossible = true;
         pler->counterCPossible = true;
         return true;
@@ -331,7 +330,7 @@ bool BiqBoard::availableCells(shared_ptr <Player>& pler, int x, int y) {
 
 
 
-// ********************** switch pler **********************
+// switching
 
 shared_ptr <Player>& BiqBoard::NowPlayer() {
     if (turn){
@@ -359,26 +358,26 @@ void BiqBoard::switchPlayer() {
 
 
 
-// ********************** Left, Right, Down, Drop, CW, CCW**********************
+// command left
 void BiqBoard::left(shared_ptr <Player>& pler){
     int player_col = pler->col;
-    if ((player_col > 0)&&(pler->LeftPossible)){
+    if ((player_col > 0)&&(pler->LPoss)){
         
         pler->col -= 1;
-        pler->RightPossible = true;
-        pler->DownPossible = true;
+        pler->RPoss = true;
+        pler->DPoss = true;
     }
     else {
-        pler->RightPossible = true;
-        pler->LeftPossible = true;
-        pler->DownPossible = true;
+        pler->RPoss = true;
+        pler->LPoss = true;
+        pler->DPoss = true;
     }
     pler->clockPossible = true;
     pler->counterCPossible = true;
 }
 
 
-
+// command right
 void BiqBoard::right(shared_ptr <Player>& pler){
     int player_col = pler->col;
     int require_col = 0;
@@ -393,30 +392,30 @@ void BiqBoard::right(shared_ptr <Player>& pler){
     }
     
     
-    if ((player_col + require_col + 2 <= board_col) && (pler->RightPossible)) {
+    if ((player_col + require_col + 2 <= board_col) && (pler->RPoss)) {
         
         pler->col += 1;
-        pler->LeftPossible = true;
-        pler->DownPossible = true;
+        pler->LPoss = true;
+        pler->DPoss = true;
         
     }
-    else if (!pler->RightPossible) {
-        pler->RightPossible = true;
-        pler->LeftPossible = true;
-        pler->DownPossible = true;
+    else if (!pler->RPoss) {
+        pler->RPoss = true;
+        pler->LPoss = true;
+        pler->DPoss = true;
     }
     pler->clockPossible = true;
     pler->counterCPossible = true;
 }
 
 
-
+// command down
 void BiqBoard::down(shared_ptr <Player>& pler){
     int player_row = pler->row;
-    if (!pler->DownPossible) {
+    if (!pler->DPoss) {
         ++pler->notclear;//
         //  cout << "can't down" << endl;
-        pler->cant_down += 1;
+        pler->downImposs += 1;
         for (int i = 0; i < 15; ++i){
             for (int j = 0; j < 11; ++j){
                 pler->PlayField[i][j].NotBlind();
@@ -424,24 +423,24 @@ void BiqBoard::down(shared_ptr <Player>& pler){
         }
     }
     
-    if ((player_row < 15)&&(pler->DownPossible)){
+    if ((player_row < 15)&&(pler->DPoss)){
         pler->row += 1;
-        pler->RightPossible = true;
-        pler->LeftPossible = true;
+        pler->RPoss = true;
+        pler->LPoss = true;
     } else {
-        pler->RightPossible = true;
-        pler->LeftPossible = true;
-        pler->DownPossible = true;
+        pler->RPoss = true;
+        pler->LPoss = true;
+        pler->DPoss = true;
     }
     pler->clockPossible = true;
     pler->counterCPossible = true;
     
-};
+}
 
 
-
+// command drop
 void BiqBoard::drop(shared_ptr <Player>& pler) {
-    while (pler->cant_down == 0) {
+    while (pler->downImposs == 0) {
         update(pler);
         down(pler);
         update(pler);
@@ -449,7 +448,7 @@ void BiqBoard::drop(shared_ptr <Player>& pler) {
 }
 
 
-
+// command cpossible
 void BiqBoard::clockPossible(shared_ptr <Player>& pler){
     int x = pler->row;
     int y = pler->col;
@@ -475,17 +474,13 @@ void BiqBoard::clockPossible(shared_ptr <Player>& pler){
                 break;
             }
             
-            //heap copy the block and cw rotate it *************
             vector <vector <string>> v_copy = copy->getBlock();
             string cwcolor = v_copy[row][col];
-            //
-            
-            //ignore white space
+    
             if ((new_col >= board_col)||(new_row >= board_row)||(cwcolor == " ")) {
                 continue;
             }
             //cw checkingcw
-            
             if (pler->PlayField[new_row][new_col].GetColor() != " "){
                 pler->clockPossible = false;
                 break;
@@ -495,7 +490,7 @@ void BiqBoard::clockPossible(shared_ptr <Player>& pler){
 }
 
 
-
+// command ccwpossible
 void BiqBoard::counterCPossible(shared_ptr <Player>& pler){
     int x = pler->row;
     int y = pler->col;
@@ -544,14 +539,14 @@ void BiqBoard::counterCPossible(shared_ptr <Player>& pler){
 
 
 
-// initialize all possible
-void BiqBoard::updatePossibilities () {
-    pler1->DownPossible = true;
-    pler1->RightPossible = true;
-    pler1->LeftPossible = true;
-    pler2->DownPossible = true;
-    pler2->RightPossible = true;
-    pler2->LeftPossible = true;
+// update possibilities
+void BiqBoard::initialPossibilities () {
+    pler1->DPoss = true;
+    pler1->RPoss = true;
+    pler1->LPoss = true;
+    pler2->DPoss = true;
+    pler2->RPoss = true;
+    pler2->LPoss = true;
 }
 
 
@@ -575,28 +570,19 @@ void BiqBoard::update(shared_ptr <Player>& pler){
             string color = v[row][col];
             if ((new_col >= board_col)||(new_row >= board_row)||(color == " ")) {
                 continue;
-            }
-            else {
+            } else {
                 if ((new_col+1 > 10)||(pler->PlayField[new_row][new_col+1].GetColor() != " ")){
-                    pler->RightPossible = false;
+                    pler->RPoss = false;
                 }
-                //cout << "it pass right possible" << endl;
                 if (check_row == 0) {
                     check_row += 1;
                     if ((new_col -1 < 0)|| (pler->PlayField[new_row][new_col-1].GetColor() != " ")){
-                        pler->LeftPossible = false;
+                        pler->LPoss = false;
                     }
                 }
-                //cout << "it pass left possible" << endl;
-                
                 if ((new_row+1 >= 15) || (pler->PlayField[new_row+1][new_col].GetColor() != " ")){
-                    pler->DownPossible = false;
-                }
-                //cout << "it pass down possible" << endl;
-                
-                
-                
-                
+                    pler->DPoss = false;
+                }                
             }
         }
     }
@@ -604,7 +590,7 @@ void BiqBoard::update(shared_ptr <Player>& pler){
     counterCPossible(pler);
 }
 
-// ********************** clean line **********************
+// checking if lines are complete
 int BiqBoard::ReCalc(shared_ptr <Player>& pler) {
     vector < int > clean_row;
     for (int row = 14; row > 0 ; row-- ) {
@@ -613,17 +599,15 @@ int BiqBoard::ReCalc(shared_ptr <Player>& pler) {
             if (pler->PlayField[row][col].GetColor() == " ") {
                 continue;
             }
-            else if ((!pler->PlayField[row][col].IsAlive())&&(pler->PlayField[row][col].GetColor() != " ")) {
+            else if ((!pler->PlayField[row][col].isActive())&&(pler->PlayField[row][col].GetColor() != " ")) {
                 num_dead_cell += 1;
             }
-            // cout << "num_dead_cell: "<<num_dead_cell << endl;  // it is fine
             if (num_dead_cell == 11) {
                 clean_row.push_back(row);
-                
             }
         }
     }
-    // for scoring
+    // score
     int a = clean_row.size();
     for (int i = 0; i < a; ++i) {
         for (int j = 0; j < 11; ++j) {
@@ -645,18 +629,15 @@ int BiqBoard::ReCalc(shared_ptr <Player>& pler) {
             }
         }
     }
-    
-    
-    
     if (clean_row.size() != 0) {
-        ClearLine(pler, clean_row);
+        destroyLine(pler, clean_row);
     }
     return a;
 }
 
 
-
-void BiqBoard::ClearLine(shared_ptr <Player>& pler,  vector< int > & clean_row){
+// adding score and destroying lines
+void BiqBoard::destroyLine(shared_ptr <Player>& pler,  vector< int > & clean_row){
     vector < vector < Cell> > new_PlayField;
     int num_clean_row = clean_row.size();
     int x = 0;
@@ -692,7 +673,7 @@ void BiqBoard::ClearLine(shared_ptr <Player>& pler,  vector< int > & clean_row){
     
     
     
-    int add_score = (num_clean_row + pler->level)*(num_clean_row + pler->level);
+    int add_score = (num_clean_row + pler->curLev)*(num_clean_row + pler->curLev);
     //cout << add_score << endl;
     
     if ((pler->IBlock != 0)&&(pler->IBlock % 4 == 0)) {
@@ -729,137 +710,76 @@ void BiqBoard::ClearLine(shared_ptr <Player>& pler,  vector< int > & clean_row){
     }
 }
 
-// ********************** Level UP and Down **********************
+// leveling up and down
 void BiqBoard::LevelUp(shared_ptr <Player>& pler){
-    int le = pler->level + 1;
-    
-    if(le == 1) {
-        //unique_ptr <Level> temp = pler->levptr;
+    int le = pler->curLev + 1;
+    if (le == 1) {
         pler->levptr= unique_ptr <Level> (new Level1);
-        pler->level = 1;
-        pler->staron = false;
-        //delete temp;
-        
-    }else if (le == 2){
-        //unique_ptr <Level> temp = pler->levptr;
+        pler->curLev = 1;
+        pler->starblk = false;
+    } else if (le == 2) {
         pler->levptr= unique_ptr <Level> (new Level2);
-        pler->level = 2;
-        pler->staron = false;
-        //delete temp;
-        
-    }else if (le == 3){
-        
-        //unique_ptr <Level> temp = pler->levptr;
+        pler->curLev = 2;
+        pler->starblk = false;
+    } else if (le == 3) {
         pler->levptr= unique_ptr <Level> (new Level3);
-        pler->level = 3;
-        pler->staron = false;
-        //delete temp;
-        
-    }else if (le == 4){
-        
-        //unique_ptr <Level> temp = pler->levptr;
+        pler->curLev = 3;
+        pler->starblk = false;
+    } else if (le == 4) {
         pler->levptr= unique_ptr <Level> (new Level4);
-        pler->level = 4;
-        pler->staron = true;
-        //delete temp;
-        
-    }/*else if ((le == 5)&&(specialOn)){
-        pler->levptr= unique_ptr <Level> (new Level5);
-        pler->level = 5;
-        pler->staron = false;
-    }*/
-    
-    
+        pler->curLev = 4;
+        pler->starblk = true;
+    }
 }
 
-void BiqBoard::LevelDown(shared_ptr <Player>& pler){
-    
-    int le = pler->level - 1;
-    
-    if(le == 1) {
-        //unique_ptr <Level> temp = pler->levptr;
+void BiqBoard::LevelDown(shared_ptr <Player>& pler) {
+    int le = pler->curLev - 1;
+    if (le == 1) {
         pler->levptr= unique_ptr <Level> (new Level1);
-        pler->level = 1;
-        pler->staron = false;
-        //delete temp;
-        
-    }else if (le == 2){
-        //unique_ptr <Level> temp = pler->levptr;
+        pler->curLev = 1;
+        pler->starblk = false;
+    } else if (le == 2) {
         pler->levptr= unique_ptr <Level> (new Level2);
-        pler->level = 2;
-        pler->staron = false;
-        //delete temp;
-        
-    }else if (le == 3){
-        
-        //unique_ptr <Level> temp = pler->levptr;
+        pler->curLev = 2;
+        pler->starblk = false;  
+    } else if (le == 3) {
         pler->levptr= unique_ptr <Level> (new Level3);
-        pler->level = 3;
-        pler->staron = false;
-        //delete temp;
-        
-    }else if (le == 0){
-        
-        //unique_ptr <Level> temp = pler->levptr;
+        pler->curLev = 3;
+        pler->starblk = false;
+    }  else if (le == 4) {
+        pler->levptr= unique_ptr <Level> (new Level4);
+        pler->curLev = 4;
+        pler->starblk = true;
+    } else if (le == 0) {
         pler->levptr= unique_ptr <Level> (new Level0);
-        pler->level = 0;
-        pler->staron = false;
-        //delete temp;
-    }else if (le == 4){
-        
-        pler->levptr= unique_ptr <Level> (new Level4);
-        pler->level = 4;
-        pler->staron = true;
-    }
-    
-}
-
-// ********************** helper function to test **********************
-void BiqBoard::SetDeadCell(shared_ptr <Player>& pler, int row1, int col1, int row2, int col2){
-    int row_times = row2 - row1 ;
-    int col_times = col2 - col1 ;
-    
-    
-    for (int i = 0; i <= row_times ; ++i) {
-        for (int j = 0; j <= col_times; ++j) {
-            
-            pler->PlayField[row1 + i][col1 + j].TurnOff("*");
-        }
+        pler->curLev = 0;
+        pler->starblk = false;
     }
 }
 
-
-
-void BiqBoard::KillLiveCell(shared_ptr <Player>& pler){
+void BiqBoard::deadCell(shared_ptr <Player>& pler) {
     for (int row = 0; row < 15; ++row){
         for (int col = 0; col < 11; ++col){
             Cell cur = pler->PlayField[row][col];
-            if (cur.IsAlive()){
+            if (cur.isActive()){
                 pler->PlayField[row][col].TurnOff(" ");
             }
         }
     }
 }
 
-
-
-
-
-// ********************** Heavy **********************
-void BiqBoard::LevelHeavy (shared_ptr <Player>& pler) {
-    if ((pler->cant_down == 0)&&(pler->level >= 3)) {
+// Heavy
+void BiqBoard::LevelHeavy(shared_ptr <Player>& pler) {
+    if ((pler->downImposs == 0)&&(pler->curLev >= 3)) {
         update(pler);
         down(pler);
         update(pler);
-        
     }
 }
 
-void BiqBoard::BlockHeavy (shared_ptr <Player>& pler) {
-    
+void BiqBoard::BlockHeavy(shared_ptr <Player>& pler) {
     for (int i = 0; i < 2; ++i) {
-        if ((pler->cant_down == 0)&&(pler->heavy)) {
-            cout << "here is bu" << endl;
+        if ((pler->downImposs == 0)&&(pler->heavy)) {
             update(pler);
             down(pler);
             update(pler);
@@ -868,102 +788,88 @@ void BiqBoard::BlockHeavy (shared_ptr <Player>& pler) {
 }
 
 
-
-
-
-// ********************** GameOver **********************
-bool BiqBoard::GameOver (shared_ptr <Player>& pler) {
+// when someone loses
+bool BiqBoard::GameOver(shared_ptr <Player>& pler) {
     string four0 = pler->PlayField[3][0].GetColor();
-    bool four0bool = pler->PlayField[3][0].IsAlive();
+    bool four0bool = pler->PlayField[3][0].isActive();
     string four1 = pler->PlayField[3][1].GetColor();
-    bool four1bool = pler->PlayField[3][1].IsAlive();
+    bool four1bool = pler->PlayField[3][1].isActive();
     string four2 = pler->PlayField[3][2].GetColor();
-    bool four2bool = pler->PlayField[3][2].IsAlive();
+    bool four2bool = pler->PlayField[3][2].isActive();
     string four3 = pler->PlayField[3][3].GetColor();
-    bool four3bool = pler->PlayField[3][3].IsAlive();
+    bool four3bool = pler->PlayField[3][3].isActive();
     string five0 = pler->PlayField[4][0].GetColor();
-    bool five0bool = pler->PlayField[4][0].IsAlive();
+    bool five0bool = pler->PlayField[4][0].isActive();
     string five1 = pler->PlayField[4][1].GetColor();
-    bool five1bool = pler->PlayField[4][1].IsAlive();
+    bool five1bool = pler->PlayField[4][1].isActive();
     string five2 = pler->PlayField[4][2].GetColor();
-    bool five2bool = pler->PlayField[4][2].IsAlive();
+    bool five2bool = pler->PlayField[4][2].isActive();
     string five3 = pler->PlayField[4][3].GetColor();
-    
     
     if ((pler->NextBlock->Type() == "I")&&
         (((four0 != " ") && (!four0bool)) ||
          ((four1 != " ") && (!four1bool)) ||
          ((four2 != " ") && (!four2bool)) ||
-         ((four3 != " ") && (!four3bool)))){
-            // cout << "I here" << endl;
+         ((four3 != " ") && (!four3bool)))) {
             return false;
-        }
+    }
     if ((pler->NextBlock->Type() == "O")&&
         (((four0 != " ") && (!four0bool))||
          ((four1 != " ") && (!four1bool))||
          ((five0 != " ") && (!five0bool))||
-         ((five1 != " ") && (!five1bool)))){
-            //cout << "O here" << endl;
+         ((five1 != " ") && (!five1bool)))) {
             return false;
-        }
+    }
     if ((pler->NextBlock->Type() == "T")&&
         (((four1 != " ") && (!four1bool))||
          ((five0 != " ") && (!five0bool))||
          ((five1 != " ") && (!five1bool))||
-         ((five2 != " ") && (!five2bool)))){
-            //cout << "T here" << endl;
-            return false;
-        }
+         ((five2 != " ") && (!five2bool)))) {
+        return false;
+    }
     if ((pler->NextBlock->Type() == "L")&&
         (((four3 != " ") && (!four3bool))||
          ((five0 != " ") && (!five0bool))||
          ((five1 != " ") && (!five1bool))||
-         ((five2 != " ") && (!five2bool)))){
-            //cout << "L here" << endl;
+         ((five2 != " ") && (!five2bool)))) {
             return false;
-        }
+    }
     if ((pler->NextBlock->Type() == "J")&&
         (((four0 != " ") && (!four0bool))||
          ((five0 != " ") && (!five0bool))||
          ((five1 != " ") && (!five1bool))||
-         ((five2 != " ") && (!five2bool)))){
-            //cout << "J here" << endl;
+         ((five2 != " ") && (!five2bool)))) {
             return false;
-        }
-    if ((pler->NextBlock->Type() == "Z")&&
+    }
+    if ((pler->NextBlock->Type() == "Z") &&
         (((four0 != " ") && (!four0bool))||
          ((four1 != " ") && (!four1bool))||
          ((five1 != " ") && (!five1bool))||
-         ((five2 != " ") && (!five2bool)))){
-            //cout << "Z here" << endl;
+         ((five2 != " ") && (!five2bool)))) {
             return false;
-        }
-    if ((pler->NextBlock->Type() == "S")&&
+    }
+    if ((pler->NextBlock->Type() == "S") &&
         (((four1 != " ") && (!four1bool))||
-         ((four2 != " ") && (!four2bool))||
-         ((five0 != " ") && (!five0bool))||
-         ((five1 != " ") && (!five1bool)))){
-            //cout << "S here" << endl;
-            
-            
-            return false;
-        }
-    //cout << "end here" << endl;
+        ((four2 != " ") && (!four2bool))||
+        ((five0 != " ") && (!five0bool))||
+        ((five1 != " ") && (!five1bool)))) {
+        return false;
+    }
     return true;
 }
 
-// ********************** Restart **********************
-void BiqBoard::Restart(shared_ptr <Player>& pler1, shared_ptr <Player>& pler2){
-    SetPler(pler1, "John" , 1, 0);
-    SetPler(pler2, "AZ" , 2, 0);
-    
+//To restart the game
+void BiqBoard::Restart(shared_ptr <Player>& pler1, shared_ptr <Player>& pler2) {
+    SetPler(pler1, "Murtaza" , 1, 0);
+    SetPler(pler2, "Qianli" , 2, 0);
 }
 
-void BiqBoard::Blind (shared_ptr <Player>& pler){
-    for (int i = 2; i < 12; ++i){
-        for (int j = 2; j < 9; ++j){
-            pler->PlayField[i][j].
-            TurnBlind();
+
+// blind
+void BiqBoard::Blind(shared_ptr <Player>& pler) {
+    for (int i = 2; i < 12; ++i) {
+        for (int j = 2; j < 9; ++j) {
+            pler->PlayField[i][j].TurnBlind();
         }
     }
 }

@@ -172,8 +172,8 @@ int main(int argc, const char * argv[]) {
 
             cmd = temp;
         
-            b.KillLiveCell(player1);
-            b.KillLiveCell(player2);
+            b.deadCell(player1);
+            b.deadCell(player2);
         
             string cont;
             if (!b.GameOver (player1)) {
@@ -217,7 +217,7 @@ int main(int argc, const char * argv[]) {
                             if (b.NowPlayer()->counterCPossible){
                                 b.NowPlayer()->CurBlock->cclockw();
                             }
-                            b.updatePossibilities();
+                            b.initialPossibilities();
                             b.update(b.NowPlayer());
                         
                         }
@@ -228,7 +228,7 @@ int main(int argc, const char * argv[]) {
                             if (b.NowPlayer()->clockPossible) {
                                 b.NowPlayer()->CurBlock->clockw();
                             }
-                            b.updatePossibilities();
+                            b.initialPossibilities();
                             b.update(b.NowPlayer());
                         }
                     }
@@ -239,7 +239,7 @@ int main(int argc, const char * argv[]) {
                             if (b.NowPlayer()->counterCPossible) {
                                 b.NowPlayer()->CurBlock->cclockw();
                             }
-                            b.updatePossibilities();
+                            b.initialPossibilities();
                             b.update(b.NowPlayer());
                         }
                     }
@@ -249,7 +249,7 @@ int main(int argc, const char * argv[]) {
                             if (b.NowPlayer()->clockPossible) {
                                 b.NowPlayer()->CurBlock->clockw();
                             }
-                            b.updatePossibilities();
+                            b.initialPossibilities();
                             b.update(b.NowPlayer());
                         }
                     }
@@ -259,8 +259,6 @@ int main(int argc, const char * argv[]) {
             if (cmd[0] == 'd') {
                 //down
                 //drop
-                // if(cmd.length() > 4) break;
-            
                 if (cmd.length() > 1) {
                     if(cmd[1] == 'o'){//down
                         if (num < 0) num = 1;
@@ -277,11 +275,7 @@ int main(int argc, const char * argv[]) {
             }
         
             if (cmd[0] == 'l') {
-                //left
-                //levelup
-                //leveldown
-                // if(cmd.length() > 9) break;
-            
+        
                 if (cmd.length() > 2) {
                     if(cmd[2] == 'f') {
                         if(num < 0) num = 1;
@@ -317,8 +311,8 @@ int main(int argc, const char * argv[]) {
                 //norandom + file
                 //  if(cmd.length() > 8) break;
                 if( cin >> norstring){
-                    if((b.NowPlayer()->level == 0)||(b.NowPlayer()->level == 1)||(b.NowPlayer()->level == 2)){
-                        cout << "only level 3 and level 4 can norandom!!" << endl;
+                    if((b.NowPlayer()->curLev == 0)||(b.NowPlayer()->curLev == 1)||(b.NowPlayer()->curLev == 2)){
+                        cout << "only curLev 3 and curLev 4 can norandom!!" << endl;
                     } else {//yes now we do this
                         cout << "we will find" << norstring << " for testing!" <<endl;
                         b.NowPlayer()->levptr->aBS(norstring,b.NowPlayer()->id);
@@ -338,8 +332,8 @@ int main(int argc, const char * argv[]) {
                 if (cmd.length() > 1) {
                     if (cmd[1] == 'a') {
                         //random
-                        if((b.NowPlayer()->level == 0)||(b.NowPlayer()->level == 1)||(b.NowPlayer()->level == 2)){
-                            cout << "only level 3 and level 4 can random back!!" << endl;
+                        if((b.NowPlayer()->curLev == 0)||(b.NowPlayer()->curLev == 1)||(b.NowPlayer()->curLev == 2)){
+                            cout << "only curLev 3 and curLev 4 can random back!!" << endl;
                         } else {
                             b.NowPlayer()->levptr->BackRan(b.NowPlayer()->id);
                         }

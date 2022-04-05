@@ -21,23 +21,23 @@ struct Player{
     std::string name;
     int id;
     int Score;
-    int level;
+    int curLev;
     int col;
     int row;
-    bool LeftPossible;
-    bool RightPossible;
-    bool DownPossible;
-    int cant_down;
+    bool LPoss;
+    bool RPoss;
+    bool DPoss;
+    int downImposs;
     std::unique_ptr<Level> levptr;
     bool clockPossible;
     bool counterCPossible;
     std::shared_ptr<Block> CurBlock;
     std::shared_ptr<Block> NextBlock;
     
-    bool IsAlive;
+    bool Active;
     int SpeAttack;
 
-    // for score
+    // keeping track of score
     int IBlock;
     int JBlock;
     int LBlock;
@@ -46,12 +46,12 @@ struct Player{
     int TBlock;
     int ZBlock;
     
-    // for Heavy
+    // keep track for Heavy
     bool heavy;
     
-    //for level4
+    // Tracker for lvl 4
     int notclear = 0;
-    bool staron = false;
+    bool starblk = false;
     int High = 0;
 };
 

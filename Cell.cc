@@ -3,17 +3,17 @@
 
 using namespace std;
 
-Cell::Cell(): isAlive(false), blind(false), color(" "), window(nullptr), x(0), y(0) {}
+Cell::Cell(): Active(false), blind(false), color(" "), window(nullptr), x(0), y(0) {}
 
 Cell::~Cell() {}
 
 void Cell::TurnOn(string new_color) {
-    isAlive = true;
+    Active = true;
     color = new_color;
 }
 
 void Cell::TurnOff(string new_color) {
-    isAlive = false;
+    Active = false;
     color = new_color;
 }
 
@@ -26,8 +26,8 @@ void Cell::NotBlind() {
 }
 
 
-bool Cell::IsAlive() {
-    return isAlive;
+bool Cell::isActive() {
+    return Active;
 }
 
 ostream &operator<<(ostream &out, const Cell &c) {

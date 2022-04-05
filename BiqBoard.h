@@ -33,7 +33,7 @@ public:
     void DrawBoard(std::shared_ptr <Player>& pler1, std::shared_ptr <Player>& pler2, Xwindow * board) override;
     bool DrawBlock(std::shared_ptr <Player>& pler, int x, int y);
     void DrawNextBlock(std::shared_ptr <Player>& pler1, std::shared_ptr <Player>& pler2, Xwindow  * board);
-    // helper function of DrawBlock
+    // method made for DrawBlock
     bool availableCells(std::shared_ptr <Player>& pler, int x, int y);
     
     
@@ -49,17 +49,16 @@ public:
     void drop(std::shared_ptr <Player>& pler);
     void clockPossible (std::shared_ptr <Player>& pler);
     void counterCPossible (std::shared_ptr <Player>& pler);
-    void updatePossibilities();
+    void initialPossibilities();
     void update(std::shared_ptr <Player>& pler);
     
     int ReCalc(std::shared_ptr <Player>& pler) override;
-    void ClearLine(std::shared_ptr <Player>& pler, std::vector<int> &clean_row);
+    void destroyLine(std::shared_ptr <Player>& pler, std::vector<int> &clean_row);
     
     void LevelUp(std::shared_ptr <Player>& pler);
     void LevelDown(std::shared_ptr <Player>& pler);
     
-    void SetDeadCell(std::shared_ptr <Player>& pler, int row1, int col1, int row2, int col2);
-    void KillLiveCell(std::shared_ptr <Player>& pler);
+    void deadCell(std::shared_ptr <Player>& pler);
     
     void LevelHeavy (std::shared_ptr <Player>& pler);
     void BlockHeavy (std::shared_ptr <Player>& pler);
