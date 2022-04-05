@@ -690,9 +690,6 @@ void BiqBoard::destroyLine(shared_ptr <Player>& pler,  vector< int > & clean_row
     
     pler->Field = new_Field;
     pler->Sco += add_score;
-    if (pler->High < pler->Sco) {
-        pler->High = pler->Sco;
-    }
 }
 
 // leveling up and down

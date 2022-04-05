@@ -1,11 +1,10 @@
 #include "Block.h"
 using namespace std;
 
-Block::Block () {};
-Block::~Block(){
-};
+Block::Block () {}
+Block::~Block() {}
 
-Block::Block (const Block& b) {
+Block::Block(const Block& b) {
     v = b.v;
 }
 

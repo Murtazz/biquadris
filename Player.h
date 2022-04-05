@@ -52,7 +52,6 @@ struct Player{
     // Tracker for lvl 4
     int notclear = 0;
     bool starblk = false;
-    int High = 0;
 };
 
 #endif
