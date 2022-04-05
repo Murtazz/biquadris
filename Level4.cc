@@ -93,9 +93,9 @@ shared_ptr<Block> Level4::Blockg(std::shared_ptr<Player> pler){
             case 3: bp = make_shared<OBlock>(); break;
             case 4: bp = make_shared<JBlock>(); break;
             case 5: bp = make_shared<TBlock>(); break;
-            case 6: bp = make_shared<SBlock>(); break;
+            case 6: bp = make_shared<OBlock>(); break;
             case 7: bp = make_shared<SBlock>(); break;
-            case 8: bp = make_shared<ZBlock>(); break;
+            case 8: bp = make_shared<LBlock>(); break;
             case 9: bp = make_shared<ZBlock>(); break;
                 
         }

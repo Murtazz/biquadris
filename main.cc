@@ -123,7 +123,7 @@ int main(int argc, const char * argv[]) {
     // terminal interface
     string cmdp;
     if (b.IsText) {
-        board.drawString(200, 250, "Terminal Biquadris.", 3);
+        board.drawString(200, 250, "Terminal Biquadris.");
     }
     while(cin >> cmdp) {
         vector<string> seqList;

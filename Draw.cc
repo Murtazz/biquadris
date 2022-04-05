@@ -17,14 +17,12 @@ void drawInBoard(Xwindow &board) {
     
 
     string s1;
-
-    int bg = 1;
     //Coverpage
     while(1) {
         // start game
         
         //background
-        board.fillRectangle( 0 , 0 , 600 , 550 , bg);
+        board.fillRectangle( 0 , 0 , 600 , 550 , 0);
         
         // title screen
         //b
@@ -119,19 +117,19 @@ void drawInBoard(Xwindow &board) {
         string line5 = "clockwise(cw) and counterclockwise(ccw).";
         string line6 = "Have fun! ";
 
-        board.drawString(100, 250, line1, 5);
-        board.drawString(100, 280, line2, 5);
-        board.drawString(100, 310, line3, 5);
-        board.drawString(100, 340, line4, 5);
-        board.drawString(100, 370, line5, 5);
-        board.drawString(100, 400, line6, 5);
+        board.drawString(100, 250, line1);
+        board.drawString(100, 280, line2);
+        board.drawString(100, 310, line3);
+        board.drawString(100, 340, line4);
+        board.drawString(100, 370, line5);
+        board.drawString(100, 400, line6);
         
         //hint
         string c = "Press anykey to continue! ";
-        board.drawString(225, 530, c, 0);
+        board.drawString(225, 530, c);
         
         if(cin >> s1) break;
     }
     
-    board.fillRectangle(0, 0, 600, 550, 5);
+    board.fillRectangle(0, 0, 600, 550, 0);
 }
