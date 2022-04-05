@@ -112,10 +112,10 @@ void drawInBoard(Xwindow &board) {
             
         string line1 = "Welcome to two players biquadris!";
         string line2 = "Here are some of the rules:";
-        string line3 = "To control the blockes by commends with (-easy)";
-        string line4 = "right(d), left(a), down(s), drop(ss), levelup(q), leveldown(e),";
+        string line3 = "To control the blocks by commends with";
+        string line4 = "right, left, down, drop, levelup, leveldown,";
         string line5 = "clockwise(cw) and counterclockwise(ccw).";
-        string line6 = "Have fun! ";
+        string line6 = "Have fun!";
 
         board.drawString(100, 250, line1);
         board.drawString(100, 280, line2);
