@@ -17,10 +17,10 @@
 
 
 struct Player{
-    std::vector <std::vector <Cell>> PlayField;
+    std::vector <std::vector <Cell>> Field;
     std::string name;
     int id;
-    int Score;
+    int Sco;
     int curLev;
     int col;
     int row;

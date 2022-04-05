@@ -10,8 +10,8 @@ using namespace std;
 
 extern string seqName1;
 extern string seqName2;
-extern int seedNum;
-extern bool seedFree;
+extern int seedn;
+extern bool seedt;
 
 Level3::Level3(){
     levnum = 3;
@@ -22,7 +22,7 @@ Level3::Level3(){
     seqCt1_int = 0;
     seqCt2_int = 0;
     
-    srand(seedNum);
+    srand(seedn);
     for(int i = 0 ; i < 4 ; i++ ) {
         numseqLt1.emplace_back(rand() % 9 + 1);
     }//for player1
@@ -75,7 +75,7 @@ shared_ptr<Block> Level3::Blockg(std::shared_ptr<Player> pler){
             ++seqCt2_int;
         }
         //
-        if (seedFree){
+        if (seedt){
             random_device rd;
             mt19937 eng(rd());
             uniform_int_distribution<> distr(1,9);

@@ -10,8 +10,8 @@ using namespace std;
 
 extern string seqName1;
 extern string seqName2;
-extern int seedNum;
-extern bool seedFree;
+extern int seedn;
+extern bool seedt;
 
 
 Level0::Level0(){

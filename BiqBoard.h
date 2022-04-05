@@ -16,7 +16,7 @@ class BiqBoard : public Board {
     std::shared_ptr <Player> pler1;
     std::shared_ptr <Player> pler2;
 public:
-    bool IsText = false;
+    bool Textmode = false;
     // finish part
     BiqBoard ();
     ~BiqBoard ();
@@ -24,7 +24,7 @@ public:
     std::shared_ptr <Player>& Getpler1();
     std::shared_ptr <Player>& Getpler2();
     int gCS(std::shared_ptr <Player>& pler);
-    void DrawBoard(std::shared_ptr <Player>& pler1, std::shared_ptr <Player>& pler2, Xwindow * board) override;
+    void createBoard(std::shared_ptr <Player>& pler1, std::shared_ptr <Player>& pler2, Xwindow * board) override;
     bool DrawBlock(std::shared_ptr <Player>& pler, int x, int y);
     void DrawNextBlock(std::shared_ptr <Player>& pler1, std::shared_ptr <Player>& pler2, Xwindow  * board);
     // method made for DrawBlock
@@ -40,7 +40,7 @@ public:
     void clockPossible(std::shared_ptr <Player>& pler);
     void counterCPossible(std::shared_ptr <Player>& pler);
     void initialPossibilities();
-    void update(std::shared_ptr <Player>& pler);
+    void updateScore(std::shared_ptr <Player>& pler);
     int ReCalc(std::shared_ptr <Player>& pler) override;
     void destroyLine(std::shared_ptr <Player>& pler, std::vector<int> &clean_row);
     void LevelUp(std::shared_ptr <Player>& pler);

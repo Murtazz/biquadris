@@ -21,8 +21,8 @@ string seqName1 = "biquadris_sequence1.txt";
 string seqName2 = "biquadris_sequence2.txt";
 string norstring;
 string seqstring;
-int seedNum = 111;
-bool seedFree = false;
+int seedn = 111;
+bool seedt = false;
 bool specialOn = false;
 
 
@@ -40,7 +40,7 @@ int main(int argc, const char * argv[]) {
                 // text-only mode
                 if(argv[i][1] == 't'){
                     cout << "text only mode!" << endl;
-                    b.IsText = true;
+                    b.Textmode = true;
                 }
                 // changing the sequence
                 if (argv[i][1] == 's') {
@@ -77,11 +77,11 @@ int main(int argc, const char * argv[]) {
                                 cout << "you forget to give a number for seed!"<< endl;
                                 i--;
                             } else {
-                                seedNum = stoi(argv[i]);
+                                seedn = stoi(argv[i]);
                             }
                         } else if(strncmp(argv[i],"-seedfree",5)) {
                             i++;
-                            seedFree = true;
+                            seedt = true;
                         }
                     }
                 }
@@ -117,12 +117,12 @@ int main(int argc, const char * argv[]) {
     b.DrawBlock(player1, player1->row, player1->col);
     
     
-    b.DrawBoard(player1, player2, &board);
+    b.createBoard(player1, player2, &board);
     
      
     // terminal interface
     string cmdp;
-    if (b.IsText) {
+    if (b.Textmode) {
         board.drawString(200, 250, "Terminal Biquadris.");
     }
     while(cin >> cmdp) {
@@ -207,7 +207,7 @@ int main(int argc, const char * argv[]) {
                                 b.NowPlayer()->CurBlock->cclockw();
                             }
                             b.initialPossibilities();
-                            b.update(b.NowPlayer());
+                            b.updateScore(b.NowPlayer());
                         
                         }
                     }
@@ -218,7 +218,7 @@ int main(int argc, const char * argv[]) {
                                 b.NowPlayer()->CurBlock->clockw();
                             }
                             b.initialPossibilities();
-                            b.update(b.NowPlayer());
+                            b.updateScore(b.NowPlayer());
                         }
                     }
                     // we also have cw for clockwise and ccw for counterclockwise
@@ -229,7 +229,7 @@ int main(int argc, const char * argv[]) {
                                 b.NowPlayer()->CurBlock->cclockw();
                             }
                             b.initialPossibilities();
-                            b.update(b.NowPlayer());
+                            b.updateScore(b.NowPlayer());
                         }
                     }
                     if (cmd[1] == 'w') { // cw
@@ -239,7 +239,7 @@ int main(int argc, const char * argv[]) {
                                 b.NowPlayer()->CurBlock->clockw();
                             }
                             b.initialPossibilities();
-                            b.update(b.NowPlayer());
+                            b.updateScore(b.NowPlayer());
                         }
                     }
                 }
@@ -252,9 +252,9 @@ int main(int argc, const char * argv[]) {
                     if(cmd[1] == 'o'){//down
                         if (num < 0) num = 1;
                         for(;num > 0;num--) {
-                            b.update(b.NowPlayer());
+                            b.updateScore(b.NowPlayer());
                             b.down(b.NowPlayer());
-                            b.update(b.NowPlayer());
+                            b.updateScore(b.NowPlayer());
                         }
                     }
                     if (cmd[1] == 'r') {//drop
@@ -270,7 +270,7 @@ int main(int argc, const char * argv[]) {
                         if(num < 0) num = 1;
                             while(num != 0) {
                             b.left(b.NowPlayer());
-                            b.update(b.NowPlayer());
+                            b.updateScore(b.NowPlayer());
                             b.LevelHeavy(b.NowPlayer());
                             b.BlockHeavy(b.NowPlayer());
                             num--;
@@ -340,7 +340,7 @@ int main(int argc, const char * argv[]) {
                         if (num < 0) num = 1;
                         while(num != 0) {
                             b.right(b.NowPlayer());
-                            b.update(b.NowPlayer());
+                            b.updateScore(b.NowPlayer());
                         
                             b.LevelHeavy(b.NowPlayer());
                             b.BlockHeavy(b.NowPlayer());
@@ -434,11 +434,11 @@ int main(int argc, const char * argv[]) {
                 
                 b.drop(b.NowPlayer());
                 
-                b.update(b.NowPlayer());
+                b.updateScore(b.NowPlayer());
                 
                 b.ReCalc(b.NowPlayer());
                 b.DrawBlock(b.NowPlayer(), b.NowPlayer()->row, b.NowPlayer()->col);
-                b.DrawBoard(player1, player2, &board);
+                b.createBoard(player1, player2, &board);
                 
                 
                 b.NowPlayer()->CurBlock = startemp;//
@@ -448,7 +448,7 @@ int main(int argc, const char * argv[]) {
 
             b.ReCalc(b.NowPlayer());
             b.DrawBlock(b.NowPlayer(), b.NowPlayer()->row, b.NowPlayer()->col);
-            b.DrawBoard(player1, player2, &board);
+            b.createBoard(player1, player2, &board);
             seqList.pop_back();
         } //end of commands 
     }//end of the real command loop
